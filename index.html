@@ -6,11 +6,11 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
 		<title></title>
 		<script type="text/javascript">
-			var db = openDatabase('escort_inspection', '1.0', '检测数据库', 2 * 1024 * 1024*1024);
-			var create_shops_sql="CREATE TABLE IF NOT EXISTS  `shops` ( `shop_id` int(11) NOT NULL,`title` varchar(200) DEFAULT NULL,`main_image` varchar(200) DEFAULT NULL, `address` varchar(200) DEFAULT NULL,`shop_class` int(11) DEFAULT NULL,`dining_type_id` int(11) DEFAULT NULL,`if_licenced` bit(1) DEFAULT NULL,`if_valid` bit(1) DEFAULT NULL,`has_rule` bit(1) DEFAULT NULL, `if_healthy` bit(1) DEFAULT NULL,`clear_level` int(11) DEFAULT NULL,PRIMARY KEY (`shop_id`))";
-			var create_insp_items_sql="CREATE TABLE IF NOT EXISTS `insp_items` (`item_id` int(11) NOT NULL ,`s_id` int(11) DEFAULT NULL, `p_id` int(11) DEFAULT NULL,`category` int(11) DEFAULT NULL,`item_name` varchar(200) DEFAULT NULL,`item_show_name` varchar(200) DEFAULT NULL, `item_standard` varchar(500) DEFAULT NULL,`item_note` varchar(500) DEFAULT NULL,`item_type_id` int(11) DEFAULT NULL,`if_show` bit(1) DEFAULT NULL, PRIMARY KEY (`item_id`))"
-			var create_insp_item_type_sql="CREATE TABLE IF NOT EXISTS `insp_item_type` (`item_type_id` int(11) NOT NULL,`item_type_name` varchar(100) DEFAULT NULL,PRIMARY KEY (`item_type_id`))"			
-			var create_insp_options_sql="CREATE TABLE IF NOT EXISTS `insp_options` (`option_id` int(11) NOT NULL,`option_name` varchar(200) DEFAULT NULL,`item_id` int(11) DEFAULT NULL,`s_id` int(11) DEFAULT NULL,PRIMARY KEY (`option_id`))"			
+			var db = openDatabase('escort_inspection', '1.0', '检测数据库', 2 * 1024 * 1024 * 1024);
+			var create_shops_sql = "CREATE TABLE IF NOT EXISTS  `shops` ( `shop_id` int(11) NOT NULL,`title` varchar(200) DEFAULT NULL,`main_image` varchar(200) DEFAULT NULL, `address` varchar(200) DEFAULT NULL,`shop_class` int(11) DEFAULT NULL,`dining_type_id` int(11) DEFAULT NULL,`if_licenced` bit(1) DEFAULT NULL,`if_valid` bit(1) DEFAULT NULL,`has_rule` bit(1) DEFAULT NULL, `if_healthy` bit(1) DEFAULT NULL,`clear_level` int(11) DEFAULT NULL,PRIMARY KEY (`shop_id`))";
+			var create_insp_items_sql = "CREATE TABLE IF NOT EXISTS `insp_items` (`item_id` int(11) NOT NULL ,`s_id` int(11) DEFAULT NULL, `p_id` int(11) DEFAULT NULL,`category` int(11) DEFAULT NULL,`item_name` varchar(200) DEFAULT NULL,`item_show_name` varchar(200) DEFAULT NULL, `item_standard` varchar(500) DEFAULT NULL,`item_note` varchar(500) DEFAULT NULL,`item_type_id` int(11) DEFAULT NULL,`if_show` bit(1) DEFAULT NULL, PRIMARY KEY (`item_id`))"
+			var create_insp_item_type_sql = "CREATE TABLE IF NOT EXISTS `insp_item_type` (`item_type_id` int(11) NOT NULL,`item_type_name` varchar(100) DEFAULT NULL,PRIMARY KEY (`item_type_id`))"
+			var create_insp_options_sql = "CREATE TABLE IF NOT EXISTS `insp_options` (`option_id` int(11) NOT NULL,`option_name` varchar(200) DEFAULT NULL,`item_id` int(11) DEFAULT NULL,`s_id` int(11) DEFAULT NULL,PRIMARY KEY (`option_id`))"
 			var msg;
 			db.transaction(function(tx) {
 				tx.executeSql(create_shops_sql);
@@ -25,18 +25,18 @@
 				//msg = '<p>Log message created and row inserted.</p>';
 				//document.querySelector('#status').innerHTML = msg;
 			});
-//			db.transaction(function(tx) {
-//				tx.executeSql('SELECT * FROM LOGS', [], function(tx, results) {
-//					var len = results.rows.length,
-//						i;
-//					msg = "<p>Found rows: " + len + "</p>";
-//					document.querySelector('#status').innerHTML += msg;
-//					for (i = 0; i < len; i++) {
-//						msg = "<p><b>" + results.rows.item(i).log + "</b></p>";
-//						document.querySelector('#status').innerHTML += msg;
-//					}
-//				}, null);
-//			});
+			//			db.transaction(function(tx) {
+			//				tx.executeSql('SELECT * FROM LOGS', [], function(tx, results) {
+			//					var len = results.rows.length,
+			//						i;
+			//					msg = "<p>Found rows: " + len + "</p>";
+			//					document.querySelector('#status').innerHTML += msg;
+			//					for (i = 0; i < len; i++) {
+			//						msg = "<p><b>" + results.rows.item(i).log + "</b></p>";
+			//						document.querySelector('#status').innerHTML += msg;
+			//					}
+			//				}, null);
+			//			});
 		</script>
 	</head>
 
