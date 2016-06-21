@@ -11,12 +11,13 @@ DataBase.prototype.init = function(data) {
 	var db = openDatabase(this.dbName, this.version, this.memo, this.dbSize);
 	db.transaction(function(tx) {
 		for (var i in data) {
-			tx.executeSql(data[i].table.create);
-		}
-	});
-	db.transaction(function(tx) {
-		for (var i in data) {
-			tx.executeSql(data[i].table.insert);
+			if (data[i].table.create) {
+				tx.executeSql(data[i].table.create);
+				if (data[i].table.insert) {
+					console.log(data[i].table.insert);
+					tx.executeSql(data[i].table.insert);
+				}
+			}
 		}
 	});
 }
