@@ -1,57 +1,298 @@
 function DataBase(ops) {
 	this.dbName = ops.dbName;
 	this.version = ops.version;
-	this.memo = ops.memo;
-	this.dbSize = ops.dbSize;
-	this.init(ops.data);
+	this.init(ops.dbName, ops.version, ops.data);
 }
 
 //初始化数据库
-DataBase.prototype.init = function(data) {
-	var db = openDatabase(this.dbName, this.version, this.memo, this.dbSize);
-	db.transaction(function(tx) {
-		for (var i in data) {
-			if (data[i].table.create) {
-				tx.executeSql(data[i].table.create);
-				if (data[i].table.insert) {
-					console.log(data[i].table.insert);
-					tx.executeSql(data[i].table.insert);
+DataBase.prototype.init = function(name, version, data) {
+	var self = this;
+	var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+	var IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction;
+	var IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange;
+
+	if (!window.indexedDB) {
+		if (window.mozIndexedDB) {
+			window.indexedDB = window.mozIndexedDB;
+		} else if (window.webkitIndexedDB) {
+			window.indexedDB = webkitIndexedDB;
+			IDBCursor = webkitIDBCursor;
+			IDBDatabaseException = webkitIDBDatabaseException;
+			IDBRequest = webkitIDBRequest;
+			IDBKeyRange = webkitIDBKeyRange;
+			IDBTransaction = webkitIDBTransaction;
+		} else {
+			document.getElementById('bodyElement').innerHTML = "<h3>IndexedDB is not supported - upgrade your browser to the latest version.</h3>";
+			return false;
+		}
+	} // if
+
+	var request = indexedDB.open(name, version)
+	request.onupgradeneeded = function(e) {
+		var db = self.db = request.result;
+		self.creatDB(db, data);
+		console.log('DB version changed to ' + version);
+	};
+	request.onsuccess = function(e) {
+		self.db = e.target.result;
+		alert('success！');
+	};
+	request.onerror = function(e) {
+		console.log(e.currentTarget.error.message);
+	};
+}
+
+//添加数据
+DataBase.prototype.addData = function(store, data) {
+		store.add(data);
+	}
+	//通过key获取数据
+DataBase.prototype.getDataByKey = function(storeName, value) {
+		var transaction = this.db.transaction(storeName, 'readwrite');
+		var store = transaction.objectStore(storeName);
+		var request = store.get(value);
+		request.onsuccess = function(e) {
+			var student = e.target.result;
+			console.log(student.name);
+		};
+	}
+	//通过key更新数据
+DataBase.prototype.updateDataByKey = function(storeName, value) {
+		var transaction = this.db.transaction(storeName, 'readwrite');
+		var store = transaction.objectStore(storeName);
+		var request = store.get(value);
+		request.onsuccess = function(e) {
+			var student = e.target.result;
+			student.age = 35;
+			store.put(student);
+		};
+	}
+	//通过key删除数据
+DataBase.prototype.deleteDataByKey = function(storeName, value) {
+		var transaction = this.db.transaction(storeName, 'readwrite');
+		var store = transaction.objectStore(storeName);
+		store.delete(value);
+	}
+	//清空表
+DataBase.prototype.clearObjectStore = function(storeName) {
+		var transaction = this.db.transaction(storeName, 'readwrite');
+		var store = transaction.objectStore(storeName);
+		store.clear();
+	}
+	//删除表
+DataBase.prototype.deleteObjectStore = function(storeName) {
+		var transaction = this.db.transaction(storeName, 'versionchange');
+		db.deleteObjectStore(storeName);
+	}
+	//通过游标遍历表
+DataBase.prototype.fetchStoreByCursor = function(storeName) {
+		var transaction = this.db.transaction(storeName);
+		var store = transaction.objectStore(storeName);
+		var request = store.openCursor();
+		request.onsuccess = function(e) {
+			var cursor = e.target.result;
+			if (cursor) {
+				console.log(cursor.key);
+				var currentStudent = cursor.value;
+				console.log(currentStudent.name);
+				cursor.continue();
+			}
+		};
+	}
+	//通过索引查询数据
+DataBase.prototype.getDataByIndex = function(storeName) {
+		var transaction = this.db.transaction(storeName);
+		var store = transaction.objectStore(storeName);
+		var index = store.index("ageIndex");
+		index.get(26).onsuccess = function(e) {
+			var student = e.target.result;
+			console.log(student.id);
+		}
+	}
+	//遍历表
+DataBase.prototype.getMultipleData = function(storeName) {
+		var transaction = this.db.transaction(storeName);
+		var store = transaction.objectStore(storeName);
+		var index = store.index("nameIndex");
+		var request = index.openCursor(null, IDBCursor.prev);
+		request.onsuccess = function(e) {
+			var cursor = e.target.result;
+			if (cursor) {
+				var student = cursor.value;
+				console.log(student.name);
+				cursor.continue();
+			}
+		}
+	}
+	//关闭数据库
+DataBase.prototype.closeDB = function() {
+		this.db.close();
+	}
+	//删除数据库
+DataBase.prototype.deleteDB = function(name) {
+		indexedDB.deleteDatabase(name);
+	}
+	//创建表和插入内容
+DataBase.prototype.creatDB = function(db, data) {
+	var self = this;
+	// create table
+	for (var i in data) {
+		var item = data[i];
+		if (item.tableName == 'cities') {
+			if (!db.objectStoreNames.contains('cities')) {
+				var store = db.createObjectStore('cities', {
+					keyPath: 'id',
+					autoIncrement: true
+				});
+				store.createIndex('cityId_idx', 'city_id', {
+					unique: true
+				});
+				for (var x in item.content) {
+					var it = item.content[x];
+					self.addData(store, it);
+				}
+			}
+		} else if (item.tableName == 'shops') {
+			if (!db.objectStoreNames.contains('shops')) {
+				var store = db.createObjectStore('shops', {
+					keyPath: 'id',
+					autoIncrement: true
+				});
+				store.createIndex('shopId_idx', 'shop_id', {
+					unique: true
+				});
+				for (var x in item.content) {
+					var it = item.content[x];
+					self.addData(store, it);
+				}
+			}
+		} else if (item.tableName == 'insp_batch') {
+			if (!db.objectStoreNames.contains('insp_batch')) {
+				var store = db.createObjectStore('insp_batch', {
+					keyPath: 'id',
+					autoIncrement: true
+				});
+				store.createIndex('batchId_idx', 'batch_id', {
+					unique: true
+				});
+				for (var x in item.content) {
+					var it = item.content[x];
+					self.addData(store, it);
+				}
+			}
+		} else if (item.tableName == 'insp_item_rules') {
+			if (!db.objectStoreNames.contains('insp_item_rules')) {
+				var store = db.createObjectStore('insp_item_rules', {
+					keyPath: 'id',
+					autoIncrement: true
+				});
+				store.createIndex('ruleId_idx', 'rule_id', {
+					unique: true
+				});
+				for (var x in item.content) {
+					var it = item.content[x];
+					self.addData(store, it);
+				}
+			}
+		} else if (item.tableName == 'insp_items') {
+			if (!db.objectStoreNames.contains('insp_items')) {
+				var store = db.createObjectStore('insp_items', {
+					keyPath: 'id',
+					autoIncrement: true
+				});
+				store.createIndex('itemId_idx', 'item_id', {
+					unique: true
+				});
+				for (var x in item.content) {
+					var it = item.content[x];
+					self.addData(store, it);
+				}
+			}
+		} else if (item.tableName == 'insp_item_type') {
+			if (!db.objectStoreNames.contains('insp_item_type')) {
+				var store = db.createObjectStore('insp_item_type', {
+					keyPath: 'id',
+					autoIncrement: true
+				});
+				store.createIndex('itemTypeId_idx', 'item_type_id', {
+					unique: true
+				});
+				for (var x in item.content) {
+					var it = item.content[x];
+					self.addData(store, it);
+				}
+			}
+		} else if (item.tableName == 'insp_options') {
+			if (!db.objectStoreNames.contains('insp_options')) {
+				var store = db.createObjectStore('insp_options', {
+					keyPath: 'id',
+					autoIncrement: true
+				});
+				store.createIndex('optionId_idx', 'option_id', {
+					unique: true
+				});
+				for (var x in item.content) {
+					var it = item.content[x];
+					self.addData(store, it);
+				}
+			}
+		} else if (item.tableName == 'insp_template') {
+			if (!db.objectStoreNames.contains('insp_template')) {
+				var store = db.createObjectStore('insp_template', {
+					keyPath: 'id',
+					autoIncrement: true
+				});
+				store.createIndex('templateId_idx', 'template_id', {
+					unique: true
+				});
+				for (var x in item.content) {
+					var it = item.content[x];
+					self.addData(store, it);
+				}
+			}
+		} else if (item.tableName == 'insp_template_info') {
+			if (!db.objectStoreNames.contains('insp_template_info')) {
+				var store = db.createObjectStore('insp_template_info', {
+					keyPath: 'id',
+					autoIncrement: true
+				});
+				store.createIndex('templateInfoId_idx', 'template_info_id', {
+					unique: true
+				});
+				for (var x in item.content) {
+					var it = item.content[x];
+					self.addData(store, it);
+				}
+			}
+		} else if (item.tableName == 'inspections') {
+			if (!db.objectStoreNames.contains('inspections')) {
+				var store = db.createObjectStore('inspections', {
+					keyPath: 'id',
+					autoIncrement: true
+				});
+				store.createIndex('inspectionId_idx', 'inspection_id', {
+					unique: true
+				});
+				for (var x in item.content) {
+					var it = item.content[x];
+					self.addData(store, it);
+				}
+			}
+		} else if (item.tableName == 'inspectors') {
+			if (!db.objectStoreNames.contains('inspectors')) {
+				var store = db.createObjectStore('inspectors', {
+					keyPath: 'id',
+					autoIncrement: true
+				});
+				store.createIndex('inspectorId_idx', 'inspector_id', {
+					unique: true
+				});
+				for (var x in item.content) {
+					var it = item.content[x];
+					self.addData(store, it);
 				}
 			}
 		}
-	});
-}
+	}
 
-//var create_shops_sql = "CREATE TABLE IF NOT EXISTS  `shops` ( `shop_id` int(11) NOT NULL,`title` varchar(200) DEFAULT NULL,`main_image` varchar(200) DEFAULT NULL, `address` varchar(200) DEFAULT NULL,`shop_class` int(11) DEFAULT NULL,`dining_type_id` int(11) DEFAULT NULL,`if_licenced` bit(1) DEFAULT NULL,`if_valid` bit(1) DEFAULT NULL,`has_rule` bit(1) DEFAULT NULL, `if_healthy` bit(1) DEFAULT NULL,`clear_level` int(11) DEFAULT NULL,PRIMARY KEY (`shop_id`))";
-//var create_insp_items_sql = "CREATE TABLE IF NOT EXISTS `insp_items` (`item_id` int(11) NOT NULL ,`s_id` int(11) DEFAULT NULL, `p_id` int(11) DEFAULT NULL,`category` int(11) DEFAULT NULL,`item_name` varchar(200) DEFAULT NULL,`item_show_name` varchar(200) DEFAULT NULL, `item_standard` varchar(500) DEFAULT NULL,`item_note` varchar(500) DEFAULT NULL,`item_type_id` int(11) DEFAULT NULL,`if_show` bit(1) DEFAULT NULL, PRIMARY KEY (`item_id`))"
-//var create_insp_item_type_sql = "CREATE TABLE IF NOT EXISTS `insp_item_type` (`item_type_id` int(11) NOT NULL,`item_type_name` varchar(100) DEFAULT NULL,PRIMARY KEY (`item_type_id`))"
-//var create_insp_options_sql = "CREATE TABLE IF NOT EXISTS `insp_options` (`option_id` int(11) NOT NULL,`option_name` varchar(200) DEFAULT NULL,`item_id` int(11) DEFAULT NULL,`s_id` int(11) DEFAULT NULL,PRIMARY KEY (`option_id`))";
-//var create_cities_sql = "CREATE TABLE `cities` (\n  `city_id` int(11) NOT NULL,\n  `city_name` varchar(50) DEFAULT NULL,\n  PRIMARY KEY (`city_id`)\n) ";
-//var msg;
-//db.transaction(function(tx) {
-//	tx.executeSql(create_shops_sql);
-//	tx.executeSql(create_insp_items_sql);
-//	tx.executeSql(create_insp_item_type_sql);
-//	tx.executeSql(create_insp_options_sql);
-//	tx.executeSql(create_cities_sql);
-//	tx.executeSql('INSERT INTO shops (shop_id, title) VALUES (1, "foobar"),(2,"ok")');
-//	tx.executeSql('INSERT INTO insp_items  VALUES (1, "fdsf")');
-//	tx.executeSql('INSERT INTO insp_item_type  VALUES (1, "fdsf")');
-//	tx.executeSql('INSERT INTO insp_options  VALUES (1, "fdsf")');
-//	tx.executeSql("INSERT INTO cities  VALUES (1,'青岛1'),(2,'北京'),(3,'上海'),(5,'深圳'),(6,'杭州')");
-//	//tx.executeSql('INSERT INTO LOGS (id, log) VALUES (2, "logmsg")');
-//	//msg = '<p>Log message created and row inserted.</p>';
-//	//document.querySelector('#status').innerHTML = msg;
-//});
-//			db.transaction(function(tx) {
-//				tx.executeSql('SELECT * FROM LOGS', [], function(tx, results) {
-//					var len = results.rows.length,
-//						i;
-//					msg = "<p>Found rows: " + len + "</p>";
-//					document.querySelector('#status').innerHTML += msg;
-//					for (i = 0; i < len; i++) {
-//						msg = "<p><b>" + results.rows.item(i).log + "</b></p>";
-//						document.querySelector('#status').innerHTML += msg;
-//					}
-//				}, null);
-//			});
+}
