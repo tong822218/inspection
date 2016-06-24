@@ -8,17 +8,35 @@
 		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 		<script src="js/data.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/dataBase.js" type="text/javascript" charset="utf-8"></script>
+
 		<script type="text/javascript">
 			var mydb = new DataBase({
 				dbName: "escort_inspection",
-				version: "2.4",
+				version: "3.6",
 				data: datas.data
 			});
+			mydb.getDistance(120.260642584188,36.2883362092619,120.27218754154188,36.27380727286948);
+			setTimeout(function() {
+				//mydb.fetchStoreByCursor("shops");
+			}, 500);
 		</script>
 	</head>
 
 	<body>
-		<div id="status" name="status">Status Message</div>
+		<div id="allmap" style="width: 100%;height: 400px;"></div>
+		<dvi style="border:solid 1px red">
+			<ul style="list-style: none;">
+				<li>稍大的设计开发建设的疯狂</li>
+				<li>发射点发射点发射点</li>
+				<li>发士大夫士大夫</li>
+				<li>发士大夫士大夫</li>
+				<li>发士大夫士大夫</li>
+			</ul>
+		</dvi>
+
 	</body>
+	
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=tQkMLXZxVpn6YEebUpNRnj1V"></script>
+	<script src="js/map.js" type="text/javascript" charset="utf-8"></script>
 
 </html>
