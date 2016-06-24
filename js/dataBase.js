@@ -79,19 +79,14 @@ DataBase.prototype.fetchStoreByCursor = function(storeName) {
 		var transaction = this.db.transaction(storeName);
 		var store = transaction.objectStore(storeName);
 		var request = store.openCursor();
+		var haha=[];
 		request.onsuccess = function(e) {
 			var cursor = e.target.result;
 			if (cursor) {
-				
-				var s=(function(){      
-	    			return cursor;
-  				})();
-  				self.shops.push(s);
-				self.setDistanceByShop(120.27218754154188, 36.27380727286948);
-				//console.log(cursor.key);
-				//var currentStudent = cursor.value;
-				cursor.continue();
+				 self.shops.push(cursor.value);
+				 cursor.continue();
 			}else {
+				self.setDistanceByShop(120.27218754154188, 36.27380727286948);
 				self.orderShopByDistance();
 			}
 		};
@@ -331,16 +326,18 @@ DataBase.prototype.getDistance = function(lng1, lat1, lng2, lat2) {
 
 //根据距离排序店铺，返回排序结果
 DataBase.prototype.setDistanceByShop = function(lng, lat) {
-	var item = this.shops[this.shops.length - 1];
-	var dis = this.getDistance(lng, lat, item.value.lng, item.value.lat);
-	this.shops[this.shops.length - 1].value.distance = dis;
+	for (var i in this.shops) {
+		var item = this.shops[i];
+		var dis = this.getDistance(lng, lat, item.lng, item.lat);
+		this.shops[i].distance = dis;
+	}
 }
 DataBase.prototype.orderShopByDistance = function() {
 
 	this.shops.sort(function(a, b) {
-		return a.value.distance - b.value.distance;
+		return a.distance - b.distance;
 	});
 	for (var i = 0; i < this.shops.length; i++) {
-		document.writeln('<br />店名:' + this.shops[i].value.title + ' name:' + this.shops[i].value.distance);
+		document.writeln('<br />店名:' + this.shops[i].title + ' name:' + this.shops[i].distance);
 	}
 }

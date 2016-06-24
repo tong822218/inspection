@@ -1,21 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html manifest="test.manifest">
 
 	<head>
 		<meta charset="utf-8" />
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
-		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script src="js/jquery-2.1.0.js"></script>
 		<script src="js/data.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/dataBase.js" type="text/javascript" charset="utf-8"></script>
 
 		<script type="text/javascript">
-			var mydb = new DataBase({
-				dbName: "escort_inspection",
-				version: "3.6",
-				data: datas.data
-			});
-			mydb.getDistance(120.260642584188,36.2883362092619,120.27218754154188,36.27380727286948);
+		
+			window.applicationCache.addEventListener('updateready', function(e) {
+				if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
+					window.applicationCache.swapCache();
+
+					if (confirm("loding new?")) {
+						window.location.reload()
+					}
+				}
+			}, false)
+
+//			var mydb = new DataBase({
+//				dbName: "escort_inspection",
+//				version: "3.6",
+//				data: datas.data
+//			});
+			//mydb.getDistance(120.260642584188, 36.2883362092619, 120.27218754154188, 36.27380727286948);
 			setTimeout(function() {
 				//mydb.fetchStoreByCursor("shops");
 			}, 500);
@@ -35,7 +46,7 @@
 		</dvi>
 
 	</body>
-	
+
 	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=tQkMLXZxVpn6YEebUpNRnj1V"></script>
 	<script src="js/map.js" type="text/javascript" charset="utf-8"></script>
 
