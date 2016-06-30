@@ -68,15 +68,54 @@
 	font-size: 14px;
 	color: #fffefe;
 }
+
+/*中间内容部分开始 */
 .content{
 	text-align: center;
 	height: auto;
 	margin: 60px 50px;
 }
+
+	/*只输入文字*/
+.content .text{
+	display: none;
+}
 .content .text input{
 	width: 70%;
 	height: 30px;
 }
+
+	/*可以插入图片*/
+.content .hasimg{
+	display: block;
+	
+}
+.content .hasimg .insert-text{
+	color:#b3b3b3;
+	font-size: 17px;
+	text-align: left;
+	width: 100%;
+	min-height: 30px;
+	line-height: 30px;
+	outline: 0;
+	border-bottom:solid 1px #0DCA18;
+}
+.content .hasimg .insert-text:focus{
+	color:#000;
+}
+.content .hasimg .imgs{
+	text-align: left;
+	margin-top: 52px;
+	width: 100%;
+}
+.content .hasimg .imgs img{
+	margin-right: 20px;
+	width: 108px;
+	height: 108px;
+	border: solid 2px #999;
+	
+}
+/*中间内容部分结束*/
 .line{
 	height: 1px;
 	background-color: #0DCA18;
