@@ -1,0 +1,20 @@
+<!doctype html>
+<html manifest="isonline.manifest">
+<head>
+<meta charset="UTF-8">
+<title>浏览器是否在线？</title>
+<script type="text/javascript">
+    window.addEventListener("online", function(e) {
+        alert('上线!');
+    }, true);
+    window.addEventListener("offline", function(e) {
+        alert('离线!');
+    }, true);
+    if (navigator.onLine) {
+        alert('浏览器在线!');
+    } else {
+        alert('浏览器离线');
+    }
+</script>
+</head>
+<body>
