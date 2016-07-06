@@ -1,0 +1,106 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+.container{
+	width: 100%;
+	height: 100%;
+}
+.top{
+	display: flex;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 45px;
+	line-height: 45px;
+	justify-content: center;
+	align-items: center;
+	background-color: #0dca18;
+}
+.top .pic{
+	width: 100px;
+	height: 17px;
+	margin: 0 auto;
+	background: url(../img/index_top.png) no-repeat;
+	background-size: contain;
+}
+#allmap{
+	height: 507px;
+	width: 100%;
+}
+.distance{
+	color: #fff;
+	font-size: 15px;
+	text-align: center;
+	line-height: 36px;
+	height: 36px;
+	width: 100%;
+	background-color: #0dca18;
+}
+.list{
+	width: 100%;
+	height: auto;
+}
+.list .item-line{
+	height: 1px;
+	background-color: #0DCA18;
+	margin: 0 20px;
+}
+.list .item{
+	padding: 14px 30px;
+	text-align: center;
+	height: 52px;
+	text-align: left;
+	display: flex;
+	flex-direction: row;
+}
+.list .item .icon{
+	width: 10%;
+	height: 52px;
+	
+}
+.list .item .icon_index{
+	border-radius:50%;
+	background-color: #0DCA18;
+	width: 47px;
+	height: 47px;
+	font-size: 30px;
+	color: #fff;
+	text-align: center;
+	line-height: 47px;
+	vertical-align: middle;
+}
+.list .item .content{
+	width: 90%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.list .item .content .shop-name{
+	position: relative;
+	width: 100%;
+	height: 50%;
+	line-height: 26px;
+	font-size: 18px;
+	color: #070707;
+}
+.list .item .content .shop-name .time{
+	text-align: right;
+	position: absolute;
+	width: 103px;
+	height: 26px;
+	right: 0;
+	top: 0;
+	line-height: 26px;
+	color: #909090;
+	font-size: 15px;
+}
+.list .item .content .address{
+	width: 100%;
+	height: 50%;
+	line-height: 26px;
+	color: #909090;
+	font-size: 15px;
+	align-self: center;
+}

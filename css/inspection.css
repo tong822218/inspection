@@ -87,7 +87,7 @@
 
 	/*可以插入图片*/
 .content .hasimg{
-	display: block;
+	display: none;
 	
 }
 .content .hasimg .insert-text{
@@ -114,6 +114,51 @@
 	height: 108px;
 	border: solid 2px #999;
 	
+}
+
+/*单选*/
+.content .radio{
+	display: none;
+	min-height: 30px;
+	width: 100%;
+	text-align: center;
+}
+.content .radio table {
+	margin: 0 auto;
+	vertical-align: top;
+}
+.content .radio img{
+	width: 38px;
+	height: 38;
+}
+
+/*多选*/
+.content .multiselect{
+	width: 100%;
+	min-height: 30px;
+	display: flex;
+	display: -webkit-flex; /* Safari */
+	flex-flow:row wrap;
+}
+.content .multiselect .item{
+	width: 50%;
+	line-height: 55px;
+}
+.content .multiselect .item span{
+	color: #646464;
+	text-align: left;
+ 	display: inline-block;
+	font-size: 15px;
+	flex-wrap: nowrap;
+	line-height: 55px;
+	height: 55px;
+	width: 60%;
+}
+.content .multiselect .item img{
+	vertical-align: middle;
+	line-height: 55px;
+	width: 27px;
+	height: 27px;
 }
 /*中间内容部分结束*/
 .line{
