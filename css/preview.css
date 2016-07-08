@@ -1,0 +1,154 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.container {
+	position: relative;
+}
+
+.top {
+	position: relative;
+	height: 42px;
+	overflow: hidden;
+}
+.top .title{
+	margin: 12px auto;
+	background: url(../img/yl_jclb.png) no-repeat;
+	background-size: contain;
+	width: 100px;
+	height: 17px;
+}
+.top .note{
+	position: absolute;
+	top: 9px;
+	right: 10px;
+	width: 23px;
+	height: 23px;
+	background: url(../img/yl_note.png) no-repeat;
+	background-size: contain;
+}
+.line{
+	height: 1px;
+	background-color:#d6d7dc;
+}
+.nav{
+	overflow: hidden;
+	line-height: 44px;
+	height: 44px;
+	display: flex;
+	justify-content: center;
+}
+.nav .item{
+	width: 132px;
+	height: 44px;
+	line-height: 44px;
+	font-size: 17px;
+	font-weight: bold;
+	color: #50d213;
+	
+}
+.more{
+	position: absolute;
+	background: url(../img/yl_more.png) no-repeat;
+	background-size: contain;
+	width: 24px;
+	height: 7px;
+	top:64px;
+	right: 30px;
+}
+
+.content .sam{
+	height: 54px;
+}
+.sam .title{
+	width:80%;
+	font-size: 14px;
+	color: #646464;
+	height: 54px;
+	line-height: 54px;
+	display: flex;
+	align-items: center;
+}
+.sam .title .num{
+	width:13px;
+	height:13px;
+	margin-right: 5px;
+	text-align: center;
+	border: solid 1px #646464;
+	line-height:13px;
+	border-radius:50%;
+	font-size:12px;
+}
+.sam .answer{
+	width: 20%;
+	height: 54px;
+}
+
+.sam .answer .pic1{
+	margin: 12px auto;
+	width: 62px;
+	height: 30px;
+	background: url(../img/yl_no.png) no-repeat;
+	background-size: contain;
+}
+.sam .answer .pic2{
+	margin: 14px auto;
+	width: 83px;
+	height: 25px;
+	border: solid 1px #fff;
+	border-radius:5px;
+	display: flex;
+	background-color: #e9e5e2;
+}
+.sam .answer .pic2 .red{
+	flex: 1;
+	font-size: 11px;
+	color: #ab0c0c;
+	height: 25px;
+	line-height: 25px;
+	text-align: center;
+	border-right: solid 1px #fff;
+}
+.sam .answer .pic2 .yellow{
+	flex: 1;
+	height: 25px;
+	font-size: 11px;
+	color: #c4c613;
+	line-height: 25px;
+	text-align: center;
+	border-right: solid 1px #fff;
+}
+.sam .answer .pic2 .green{
+	flex: 1;
+	height: 25px;
+	font-size: 11px;
+	color: #0e950b;
+	line-height: 25px;
+	text-align: center;
+}
+
+
+.sam .answer .pic3{
+	margin: 12px auto;
+	width: 62px;
+	height: 30px;
+	line-height: 30px;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+
+.first{
+	margin: 0 30px;
+	background-color: #fff;
+	display: flex;
+}
+
+.second{
+	padding-left: 50px;
+	padding-right: 30px;
+	background-color: #fff;
+	display: flex;
+	background-color: #f6f6f6;
+}

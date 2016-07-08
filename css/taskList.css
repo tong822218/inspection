@@ -1,0 +1,95 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+.top {
+	position: relative;
+	height: 42px;
+	overflow: hidden;
+}
+.top .title{
+	margin: 12px auto;
+	background: url(../img/task_top.png) no-repeat;
+	background-size: contain;
+	width: 100px;
+	height: 17px;
+}
+.line{
+	height: 1px;
+	background-color:#d6d7dc;
+}
+.content .item{
+	height: 96px;
+	display: flex;
+	margin: 0 18px;
+	align-items: center;
+}
+.content .item .icon{
+	background: url(../img/task_icon.png) no-repeat;
+	background-size: contain;
+	width: 60px;
+	height: 60px;
+}
+.content .item .shoptext{
+	flex: 4;
+	margin: 0 18px;
+	height: 96px;
+}
+.content .item .shoptext .up{
+	height: 48px;
+	line-height: 48px;
+	display: flex;
+	margin-top: 7px;
+}
+.content .item .shoptext .up .shopName{
+	font-size: 16px;
+	color: #070707;
+	height: 48px;
+	line-height: 48px;
+	flex:3;
+	overflow: hidden;
+	margin-right: 10px;
+}
+.content .item .shoptext .up .time{
+	height: 48px;
+	line-height: 48px;
+	flex:1;
+	font-size: 13px;
+	color: #909090;
+}
+.content .item .shoptext .down{
+	height: 48px;
+	display: flex;
+	margin-top: -13px;
+}
+.content .item .shoptext .down .address{
+	height: 48px;
+	line-height: 48px;
+	flex:3;
+	font-size: 13px;
+	color: #909090;
+	overflow: hidden;
+	margin-right: 10px;
+}
+.content .item .shoptext .down .person{
+	height: 48px;
+	line-height: 48px;
+	flex:1;
+	font-size: 13px;
+	color: #909090;
+}
+
+.content .item .answer{
+	flex: 1;
+	line-height: 96px;
+}
+
+.content .item .answer.red{
+	color: #ff3b30;
+}
+.content .item .answer.green{
+	color: #3ad531;
+}
+.content .item .answer.yellow{
+	color: #f98b0a;
+}
