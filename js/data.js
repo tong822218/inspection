@@ -50878,41 +50878,7 @@ var Datas;
     "inspectors" : "蒋岩"
   } ],
   "tableName" : "insp_batch"
-}, {
-  "content" : [ ],
-  "tableName" : "insp_item_rules"
-}, {
-  "content" : [ {
-    "itemId" : 4156,
-    "sId" : null,
-    "pId" : null,
-    "category" : null,
-    "itemName" : "食品处理区是否有给排水系统？",
-    "itemShowName" : "食品处理区是否有给排水系统？",
-    "itemStandard" : null,
-    "itemNote" : null,
-    "itemTypeId" : null,
-    "ifShow" : true
-  }, {
-    "itemId" : 5566,
-    "sId" : null,
-    "pId" : null,
-    "category" : null,
-    "itemName" : "排水沟内有无设置其他管路？",
-    "itemShowName" : "排水沟内有无设置其他管路？",
-    "itemStandard" : null,
-    "itemNote" : null,
-    "itemTypeId" : null,
-    "ifShow" : true
-  } ],
-  "tableName" : "insp_items"
-}, {
-  "content" : [ ],
-  "tableName" : "insp_item_type"
-}, {
-  "content" : [ ],
-  "tableName" : "insp_options"
-}, {
+},  {
   "content" : [ ],
   "tableName" : "insp_template"
 }, {
@@ -50944,7 +50910,166 @@ var Datas;
 }, {
   "content" : [ ],
   "tableName" : "inspectors"
-} ];
+},
+  {
+  "content" : [ {
+    "ruleId" : 1,
+    "itemId" : 1,
+    "itemName" : "是否有与外界相连的门？",
+    "answerTypeId" : 1,
+    "itemResult" : "1",
+    "childItemId" : 2,
+    "childItemName" : "是什么门"
+  }, {
+    "ruleId" : 2,
+    "itemId" : 2,
+    "itemName" : "是什么门",
+    "answerTypeId" : 2,
+    "itemResult" : "自动回弹门",
+    "childItemId" : 3,
+    "childItemName" : "是否能自动回弹"
+  }, {
+    "ruleId" : 3,
+    "itemId" : 2,
+    "itemName" : "是什么门",
+    "answerTypeId" : 2,
+    "itemResult" : "手动关闭门",
+    "childItemId" : 4,
+    "childItemName" : "是否保持关闭"
+  } ],
+  "tableName" : "insp_item_rules"
+}, {
+  "content" : [ {
+    "itemId" : 1,
+    "sId" : null,
+    "pId" : null,
+    "category" : 1,
+    "answerTypeId" : 2,
+    "itemName" : "是否有与外界相连的门？",
+    "itemShowName" : "",
+    "itemStandard" : "",
+    "itemNote" : "",
+    "itemTypeId" : 1,
+    "ifShow" : true,
+    "createTime" : "2016-07-13"
+  }, {
+    "itemId" : 2,
+    "sId" : null,
+    "pId" : 1,
+    "category" : 2,
+    "answerTypeId" : 2,
+    "itemName" : "是什么门",
+    "itemShowName" : "",
+    "itemStandard" : "",
+    "itemNote" : "",
+    "itemTypeId" : 1,
+    "ifShow" : true,
+    "createTime" : "2016-07-13"
+  }, {
+    "itemId" : 3,
+    "sId" : null,
+    "pId" : 2,
+    "category" : 2,
+    "answerTypeId" : 3,
+    "itemName" : "是否能自动回弹",
+    "itemShowName" : "",
+    "itemStandard" : "",
+    "itemNote" : "",
+    "itemTypeId" : 1,
+    "ifShow" : true,
+    "createTime" : "2016-07-13"
+  }, {
+    "itemId" : 4,
+    "sId" : 3,
+    "pId" : 2,
+    "category" : 2,
+    "answerTypeId" : 4,
+    "itemName" : "是否保持关闭",
+    "itemShowName" : "",
+    "itemStandard" : "",
+    "itemNote" : "",
+    "itemTypeId" : 1,
+    "ifShow" : true,
+    "createTime" : "2016-07-13"
+  } ],
+  "tableName" : "insp_items"
+}, {
+  "content" : [ {
+    "itemTypeId" : 1,
+    "itemTypeName" : "是否有与外界相连的门？"
+  }, {
+    "itemTypeId" : 2,
+    "itemTypeName" : "是否设置物流通道"
+  }, {
+    "itemTypeId" : 3,
+    "itemTypeName" : "是否有防蝇灭蝇措施"
+  }, {
+    "itemTypeId" : 4,
+    "itemTypeName" : "设备设施是否干净，防止在存放、操作中产生交叉污染"
+  }, {
+    "itemTypeId" : 5,
+    "itemTypeName" : "是否有排烟设施"
+  }, {
+    "itemTypeId" : 6,
+    "itemTypeName" : "是否有窗？"
+  }, {
+    "itemTypeId" : 7,
+    "itemTypeName" : "地面是否有排水沟"
+  }, {
+    "itemTypeId" : 8,
+    "itemTypeName" : "天花板是否有平整的吊顶"
+  }, {
+    "itemTypeId" : 9,
+    "itemTypeName" : "天花板是否有掉落异物的风险"
+  }, {
+    "itemTypeId" : 10,
+    "itemTypeName" : "查看人员穿着工服是否干净"
+  }, {
+    "itemTypeId" : 11,
+    "itemTypeName" : "查看岗位人员未带口罩"
+  }, {
+    "itemTypeId" : 12,
+    "itemTypeName" : "查看常温储存区域"
+  }, {
+    "itemTypeId" : 13,
+    "itemTypeName" : "是否使用化学品"
+  }, {
+    "itemTypeId" : 14,
+    "itemTypeName" : "是否使用添加剂"
+  }, {
+    "itemTypeId" : 15,
+    "itemTypeName" : "是否识别不合格品"
+  }, {
+    "itemTypeId" : 16,
+    "itemTypeName" : "查看是否有冷藏柜"
+  }, {
+    "itemTypeId" : 17,
+    "itemTypeName" : "查看是否有冷冻柜"
+  }, {
+    "itemTypeId" : 18,
+    "itemTypeName" : "查看是否制作裱花蛋糕、凉菜、生食水产品？"
+  }, {
+    "itemTypeId" : 19,
+    "itemTypeName" : "加工岗位"
+  }, {
+    "itemTypeId" : 20,
+    "itemTypeName" : "清洗消毒"
+  } ],
+  "tableName" : "insp_item_type"
+}, {
+  "content" : [ {
+    "optionId" : 1,
+    "optionName" : "自动回弹门",
+    "itemId" : 2,
+    "sId" : null
+  }, {
+    "optionId" : 2,
+    "optionName" : "手动关闭门",
+    "itemId" : 2,
+    "sId" : 1
+  }],
+  "tableName" : "insp_options"
+}];
  this.getData=function(){
  	return this.data;
  };
