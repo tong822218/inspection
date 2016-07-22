@@ -6,168 +6,11 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
 		<script src="js/jquery-3.0.0.min.js"></script>
 		<script src="" type="text/javascript" charset="utf-8"></script>
-		<script src="js/inspection.js" type="text/javascript" charset="utf-8"></script>
 		<link rel="stylesheet" type="text/css" href="css/inspection.css" />
 		<script src="js/data.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/dataBase.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/inspection.js" type="text/javascript" charset="utf-8"></script>
 		<title>检验</title>
-		<script type="text/javascript">
-			var items = ''; //所有检查项
-			var itemRules = ''; //所有检查项规则
-			var itemTypes = ''; //所有检查大项
-			var list = []; //每个检查大项下的检查项
-			var currentTypeIndex = 0; //当前检测大项的index
-			var currentIdex = 0; //当前list 的 index;
-			var mydb = new DataBase({
-				dbName: "escort_inspection",
-				version: "5",
-				data: datas.data
-			}, function callback() {
-				mydb.fetchStoreByCursor("insp_items");
-				mydb.fetchStoreByCursor("insp_item_rules");
-				mydb.fetchStoreByCursor("insp_item_type");
-				var itv = setInterval(function() {
-					items = mydb.inspItems;
-					itemRules = mydb.itemRules;
-					itemTypes = mydb.itemTypes;
-					console.log(items);
-					console.log(itemRules);
-
-					if(items != '' && itemRules != '' && itemTypes != '') {
-						window.clearInterval(itv);
-						initDom();
-					}
-				}, 200);
-			});
-
-			function getItemsByType() {
-				for(var i = 0; i < items.length; i++) {
-					if(itemTypes[currentTypeIndex]['itemTypeId'] == items[i]['itemTypeId']) {
-						list.push(items[i]);
-					}
-				}
-				currentTypeIndex++;
-			}
-			//初始化dom
-			function initDom() {
-				hideAll();
-				if(currentTypeIndex==(itemTypes.length-1)){
-					return;
-				}
-				
-				getItemsByType();
-				
-				if(list[0]['answerTypeId'] == 1) {
-					$(".content .text").css({
-						"display": "block"
-					});
-				} else if(list[0]['answerTypeId'] == 2) {
-					$(".content .hasimg").css({
-						"display": "block"
-					});
-				} else if(list[0]['answerTypeId'] == 3) {
-					$(".content .radio").css({
-						"display": "block"
-					});
-				} else if(list[0]['answerTypeId'] == 4) {
-					$(".content .multiselect").css({
-						"display": "flex"
-					});
-				}
-				$(".question .text .big").html(list[0]['itemName']);
-				$(".question .text .little").html(list[0]['itemStandard']);
-			}
-			//重新加载页面
-			function reLoadDom(result) {
-				hideAll();
-				for(var i = 0; i < itemRules.length; i++) {
-					if(itemRules[i]['itemResult'] == result && itemRules[i]['itemId'] == list[currentIdex]['itemId']) {
-						for(var j = 0; j < list.length; j++) {
-							if(list[j]['itemId'] == itemRules[i]['childItemId']) {
-								var item = items[j];
-								if(item['answerTypeId'] == 1) {
-									$(".content .text").css({
-										"display": "block"
-									});
-								} else if(item['answerTypeId'] == 2) {
-									$(".content .hasimg").css({
-										"display": "block"
-									});
-								} else if(item['answerTypeId'] == 3) {
-									$(".content .radio").css({
-										"display": "block"
-									});
-								} else if(item['answerTypeId'] == 4) {
-									$(".content .multiselect").css({
-										"display": "flex"
-									});
-								}
-								$(".question .text .big").html(item['itemName']);
-								$(".question .text .little").html(item['itemStandard']);
-							}
-						}
-
-					}
-				}
-
-			}
-			//上一题
-			function pre() {
-				currentIdex -= 1
-				if(currentIdex < 0) {
-					currentIdex = 0;
-				}
-				reLoadDom();
-			}
-			//下一题
-			function next() {
-				var result = $("#result").val();
-				if(list[currentIdex]['answerTypeId']==1) {
-					initDom();
-				} else {
-					currentIdex += 1;
-					if(currentIdex > items.length - 1) {
-						initDom();
-					}
-					reLoadDom(result);
-				}
-
-			}
-			
-
-			function hideAll() {
-				$(".content .text").css({
-					"display": "none"
-				});
-				$(".content .hasimg").css({
-					"display": "none"
-				});
-				$(".content .radio").css({
-					"display": "none"
-				});
-				$(".content .multiselect").css({
-					"display": "none"
-				});
-			}
-
-			function changeResult(dom, sta) {
-				switch(sta) {
-					case 1:
-						$("#result").val($(dom).val());
-						break;
-					case 2:
-						$("#result").val($(dom).html());
-						break;
-					case 3:
-						break;
-					case 4:
-						break;
-					default:
-						break;
-				}
-
-			}
-		</script>
 	</head>
 
 	<body>
@@ -176,7 +19,7 @@
 		<div class="container">
 			<div class="top">
 				<div class="title"></div>
-				<did class="preview">预览</did>
+				<div class="preview">预览</div>
 			</div>
 			<div class="question"> &nbsp;
 				<div class="page"></div>
@@ -193,15 +36,18 @@
 				<div class="hasimg">
 					<div class="insert-text" contenteditable="true" onchange="changeResult(this,2)">请输入描述</div>
 					<div class="imgs">
-						<img src="img/isp_img.png"><img src="img/isp_add.png" />
+							<div>
+								<a id="a1" > <input type="file" onchange="fileChange(this,1)" /> </a>
+							</div>
+						<!--<img src="img/isp_img.png"><img src="img/isp_add.png" />-->
 					</div>
 				</div>
 				<div class="radio">
 					<table border="0" cellspacing="" cellpadding="">
 						<tr>
-							<td><img src="img/isp_yes.png" alt="" /></td>
+							<td id="radio-yes" onclick="selOne(1)"><img src="img/isp_nosel.png"  alt="" /></td>
 							<td width="38xp"></td>
-							<td><img src="img/isp_no.png" alt="" /></td>
+							<td id="radio-no" onclick="selOne(2)"><img src="img/isp_nosel.png" alt="" /></td>
 						</tr>
 						<tr>
 							<td>YES</td>
@@ -211,12 +57,11 @@
 					</table>
 				</div>
 				<div class="multiselect">
-					<div class="item"><span>A.面食</span><img src="img/isp_sel.png"></div>
-					<div class="item"><span>B.汤类</span><img src="img/isp_sel.png"></div>
-					<div class="item"><span>C.炒菜</span><img src="img/isp_sel.png"></div>
-					<div class="item"><span>D.凉拌菜</span><img src="img/isp_sel.png"></div>
-					<div class="item"><span>E.炒菜</span><img src="img/isp_sel.png"></div>
-					<div class="item"><span>F.凉拌菜</span><img src="img/isp_sel.png"></div>
+					<div class="item" onclick="selMul(this)"><span>面食</span><img src="img/isp_nosel.png"></div>
+					<div class="item" onclick="selMul(this)"><span>汤类</span><img src="img/isp_nosel.png"></div>
+					<div class="item" onclick="selMul(this)"><span>炒菜</span><img src="img/isp_nosel.png"></div>
+					<div class="item" onclick="selMul(this)"><span>凉拌菜</span><img src="img/isp_nosel.png"></div>
+					<div class="item" onclick="selMul(this)"><span>炒菜</span><img src="img/isp_nosel.png"></div>
 					<div style="clear:both"></div>
 				</div>
 			</div>

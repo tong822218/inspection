@@ -33,8 +33,8 @@ var Datas;
     "hasRule" : true,
     "ifHealthy" : true,
     "clearLevel" : 2,
-    "lat" : 36.07387544504001,
-    "lng" : 120.39063569641517
+    "lat" : null,
+    "lng" : null
   }, {
     "shopId" : 1000001,
     "title" : "海底捞火锅(李沧万达店)",
@@ -4340,6 +4340,276 @@ var Datas;
     "clearLevel" : null,
     "lat" : 36.390891915329604,
     "lng" : 120.45064567324052
+  }, {
+    "shopId" : 1000293,
+    "title" : "麦当劳",
+    "mainImage" : "/attached/shop_images/1/2929387/1.JPG",
+    "address" : "香港中路72号",
+    "cityId" : 1,
+    "shopClass" : 2,
+    "diningTypeId" : null,
+    "ifLicenced" : null,
+    "ifValid" : null,
+    "hasRule" : null,
+    "ifHealthy" : null,
+    "clearLevel" : null,
+    "lat" : 36.06276695221182,
+    "lng" : 120.392123777152
+  }, {
+    "shopId" : 1000294,
+    "title" : "肯德基",
+    "mainImage" : "/attached/shop_images/1/43579747/1.jpg",
+    "address" : "香港中路86号",
+    "cityId" : 1,
+    "shopClass" : 2,
+    "diningTypeId" : null,
+    "ifLicenced" : null,
+    "ifValid" : null,
+    "hasRule" : null,
+    "ifHealthy" : null,
+    "clearLevel" : null,
+    "lat" : 36.0646379692212,
+    "lng" : 120.398660788785
+  }, {
+    "shopId" : 1000295,
+    "title" : "麦当劳",
+    "mainImage" : "/attached/shop_images/1/5312662/1.jpg",
+    "address" : "麦当劳（台东餐厅）青岛市市北区华阳路25号",
+    "cityId" : 1,
+    "shopClass" : 2,
+    "diningTypeId" : null,
+    "ifLicenced" : null,
+    "ifValid" : null,
+    "hasRule" : null,
+    "ifHealthy" : null,
+    "clearLevel" : null,
+    "lat" : 36.0909236956255,
+    "lng" : 120.346176807667
+  }, {
+    "shopId" : 1000296,
+    "title" : "肯德基",
+    "mainImage" : "/attached/shop_images/1/2785291/1.jpg",
+    "address" : "肯德基(延安餐厅)青岛市市北区延安二路10丁",
+    "cityId" : 1,
+    "shopClass" : 2,
+    "diningTypeId" : null,
+    "ifLicenced" : null,
+    "ifValid" : null,
+    "hasRule" : null,
+    "ifHealthy" : null,
+    "clearLevel" : null,
+    "lat" : 36.0794752870426,
+    "lng" : 120.347196546704
+  }, {
+    "shopId" : 1000297,
+    "title" : "肯德基",
+    "mainImage" : "/attached/shop_images/1/24082835/1.jpg",
+    "address" : "同安路872号一层",
+    "cityId" : 1,
+    "shopClass" : 2,
+    "diningTypeId" : null,
+    "ifLicenced" : null,
+    "ifValid" : null,
+    "hasRule" : null,
+    "ifHealthy" : null,
+    "clearLevel" : null,
+    "lat" : 36.1070236005901,
+    "lng" : 120.438448573887
+  }, {
+    "shopId" : 1000300,
+    "title" : "星巴克(CBD万达店)",
+    "mainImage" : "/attached/shop_images/1/3559774/1.jpg",
+    "address" : "市北区 延吉路116号CBD万达广场(近连云港路)",
+    "cityId" : 1,
+    "shopClass" : 2,
+    "diningTypeId" : null,
+    "ifLicenced" : null,
+    "ifValid" : null,
+    "hasRule" : null,
+    "ifHealthy" : null,
+    "clearLevel" : null,
+    "lat" : 36.0876340318381,
+    "lng" : 120.373824497351
+  }, {
+    "shopId" : 1000301,
+    "title" : "星巴克(合肥路永旺店)",
+    "mainImage" : "/attached/shop_images/1/21585628/1.jpg",
+    "address" : "市北区 合肥路672号永旺购物广场3楼323室",
+    "cityId" : 1,
+    "shopClass" : 2,
+    "diningTypeId" : null,
+    "ifLicenced" : null,
+    "ifValid" : null,
+    "hasRule" : null,
+    "ifHealthy" : null,
+    "clearLevel" : null,
+    "lat" : 36.1123475085738,
+    "lng" : 120.407953260783
+  }, {
+    "shopId" : 1000302,
+    "title" : "星巴克",
+    "mainImage" : "/attached/shop_images/1/6005352/1.jpg",
+    "address" : " 崂山区 同安路880号证大大拇指广场A区1楼(近海尔路)",
+    "cityId" : 1,
+    "shopClass" : 2,
+    "diningTypeId" : null,
+    "ifLicenced" : null,
+    "ifValid" : null,
+    "hasRule" : null,
+    "ifHealthy" : null,
+    "clearLevel" : null,
+    "lat" : 36.1091729444297,
+    "lng" : 120.44367820432
+  }, {
+    "shopId" : 1000303,
+    "title" : "必胜客",
+    "mainImage" : "/attached/shop_images/1/5616612/1.jpg",
+    "address" : "崂山区 同安路880号大拇指广场2层(近人才市场)",
+    "cityId" : 1,
+    "shopClass" : 1,
+    "diningTypeId" : null,
+    "ifLicenced" : null,
+    "ifValid" : null,
+    "hasRule" : null,
+    "ifHealthy" : null,
+    "clearLevel" : null,
+    "lat" : 36.1088087361567,
+    "lng" : 120.443327207173
+  }, {
+    "shopId" : 1000304,
+    "title" : "星巴克(李沧万达店)",
+    "mainImage" : "/attached/shop_images/1/6375305/1.jpg",
+    "address" : "李沧区 巨峰路178号李沧万达广场9-1-2地块一层107号",
+    "cityId" : 1,
+    "shopClass" : 2,
+    "diningTypeId" : null,
+    "ifLicenced" : null,
+    "ifValid" : null,
+    "hasRule" : null,
+    "ifHealthy" : null,
+    "clearLevel" : null,
+    "lat" : 36.1680007797328,
+    "lng" : 120.429903277057
+  }, {
+    "shopId" : 1000305,
+    "title" : "必胜客(乐客城-PB5021)",
+    "mainImage" : "/attached/shop_images/1/8846301/1.jpg",
+    "address" : "李沧区 夏庄路7号负一层、一层的房产",
+    "cityId" : 1,
+    "shopClass" : 1,
+    "diningTypeId" : null,
+    "ifLicenced" : null,
+    "ifValid" : null,
+    "hasRule" : null,
+    "ifHealthy" : null,
+    "clearLevel" : null,
+    "lat" : 36.1604967954265,
+    "lng" : 120.420686341862
+  }, {
+    "shopId" : 1000306,
+    "title" : "星巴客（万象城一店）",
+    "mainImage" : "/attached/shop_images/1/23067074/1.jpg",
+    "address" : "山东路10号万象城B149",
+    "cityId" : 1,
+    "shopClass" : 2,
+    "diningTypeId" : null,
+    "ifLicenced" : null,
+    "ifValid" : null,
+    "hasRule" : null,
+    "ifHealthy" : null,
+    "clearLevel" : null,
+    "lat" : 36.0693679969546,
+    "lng" : 120.37220927117
+  }, {
+    "shopId" : 1000307,
+    "title" : "必胜客(宁夏路店PB5007)",
+    "mainImage" : "/attached/shop_images/1/6231561/1.jpg",
+    "address" : "宁夏路162号大润发商场1楼(近新田路)",
+    "cityId" : 1,
+    "shopClass" : 1,
+    "diningTypeId" : null,
+    "ifLicenced" : null,
+    "ifValid" : null,
+    "hasRule" : null,
+    "ifHealthy" : null,
+    "clearLevel" : null,
+    "lat" : 36.0809774613693,
+    "lng" : 120.387124899839
+  }, {
+    "shopId" : 1000308,
+    "title" : "星巴克(阳光百货店)",
+    "mainImage" : "/attached/shop_images/1/583992/1.jpg",
+    "address" : "香港中路38号阳光百货1楼(近南京路)",
+    "cityId" : 1,
+    "shopClass" : 2,
+    "diningTypeId" : null,
+    "ifLicenced" : null,
+    "ifValid" : null,
+    "hasRule" : null,
+    "ifHealthy" : null,
+    "clearLevel" : null,
+    "lat" : 36.0650266077396,
+    "lng" : 120.385075521001
+  }, {
+    "shopId" : 1000309,
+    "title" : "必胜客(万象城店PB5041)",
+    "mainImage" : "/attached/shop_images/1/23325052/1.jpg",
+    "address" : "山东青岛市南区华润中心万象城B-111号",
+    "cityId" : 1,
+    "shopClass" : 1,
+    "diningTypeId" : null,
+    "ifLicenced" : null,
+    "ifValid" : null,
+    "hasRule" : null,
+    "ifHealthy" : null,
+    "clearLevel" : null,
+    "lat" : 36.0693679969546,
+    "lng" : 120.37220927117
+  }, {
+    "shopId" : 1000310,
+    "title" : "麦当劳",
+    "mainImage" : "/attached/shop_images/1/6007471/1.jpg",
+    "address" : "香港东路22号",
+    "cityId" : 1,
+    "shopClass" : 2,
+    "diningTypeId" : null,
+    "ifLicenced" : null,
+    "ifValid" : null,
+    "hasRule" : null,
+    "ifHealthy" : null,
+    "clearLevel" : null,
+    "lat" : 36.1086916949515,
+    "lng" : 120.442986219161
+  }, {
+    "shopId" : 1000311,
+    "title" : "肯德基",
+    "mainImage" : "/attached/shop_images/1/6007329/1.jpg",
+    "address" : "同安路880号",
+    "cityId" : 1,
+    "shopClass" : 2,
+    "diningTypeId" : null,
+    "ifLicenced" : null,
+    "ifValid" : null,
+    "hasRule" : null,
+    "ifHealthy" : null,
+    "clearLevel" : null,
+    "lat" : 36.1089811785706,
+    "lng" : 120.442755515537
+  }, {
+    "shopId" : 1000312,
+    "title" : "星巴克",
+    "mainImage" : "/attached/shop_images/1/6037935/1.jpg",
+    "address" : "崂山区 秦岭路18号丽达广场(近会展中心)",
+    "cityId" : 1,
+    "shopClass" : 1,
+    "diningTypeId" : null,
+    "ifLicenced" : null,
+    "ifValid" : null,
+    "hasRule" : null,
+    "ifHealthy" : null,
+    "clearLevel" : null,
+    "lat" : 36.1028225051939,
+    "lng" : 120.463912231912
   }, {
     "shopId" : 2000002,
     "title" : "东方饺子王（长楹天街店）",
@@ -50878,40 +51148,7 @@ var Datas;
     "inspectors" : "蒋岩"
   } ],
   "tableName" : "insp_batch"
-},  {
-  "content" : [ ],
-  "tableName" : "insp_template"
 }, {
-  "content" : [ ],
-  "tableName" : "insp_template_info"
-}, {
-  "content" : [ {
-    "inspectionId" : 1,
-    "batchId" : 123,
-    "itemId" : 4156,
-    "valueInt" : null,
-    "valueBoolean" : null,
-    "valueOption" : null,
-    "valueString" : "是",
-    "itemScore" : null,
-    "createTime" : "2016-02-23"
-  }, {
-    "inspectionId" : 2,
-    "batchId" : 123,
-    "itemId" : 5566,
-    "valueInt" : null,
-    "valueBoolean" : null,
-    "valueOption" : null,
-    "valueString" : "是",
-    "itemScore" : null,
-    "createTime" : "2016-02-23"
-  } ],
-  "tableName" : "inspections"
-}, {
-  "content" : [ ],
-  "tableName" : "inspectors"
-},
-  {
   "content" : [ {
     "ruleId" : 1,
     "itemId" : 1,
@@ -50936,6 +51173,22 @@ var Datas;
     "itemResult" : "手动关闭门",
     "childItemId" : 4,
     "childItemName" : "是否保持关闭"
+  }, {
+    "ruleId" : 4,
+    "itemId" : 3,
+    "itemName" : "是否能自动回弹",
+    "answerTypeId" : 1,
+    "itemResult" : "0",
+    "childItemId" : 5,
+    "childItemName" : "是否人为因素"
+  }, {
+    "ruleId" : 5,
+    "itemId" : 6,
+    "itemName" : "是否设置物流通道",
+    "answerTypeId" : 1,
+    "itemResult" : "1",
+    "childItemId" : 7,
+    "childItemName" : "是否按照生进熟出的单一流向"
   } ],
   "tableName" : "insp_item_rules"
 }, {
@@ -50970,7 +51223,7 @@ var Datas;
     "sId" : null,
     "pId" : 2,
     "category" : 2,
-    "answerTypeId" : 3,
+    "answerTypeId" : 1,
     "itemName" : "是否能自动回弹",
     "itemShowName" : "",
     "itemStandard" : "",
@@ -50983,7 +51236,7 @@ var Datas;
     "sId" : 3,
     "pId" : 2,
     "category" : 2,
-    "answerTypeId" : 4,
+    "answerTypeId" : 1,
     "itemName" : "是否保持关闭",
     "itemShowName" : "",
     "itemStandard" : "",
@@ -50991,6 +51244,45 @@ var Datas;
     "itemTypeId" : 1,
     "ifShow" : true,
     "createTime" : "2016-07-13"
+  }, {
+    "itemId" : 5,
+    "sId" : null,
+    "pId" : 3,
+    "category" : 2,
+    "answerTypeId" : 1,
+    "itemName" : "是否人为因素",
+    "itemShowName" : "是否人为因素",
+    "itemStandard" : "",
+    "itemNote" : "",
+    "itemTypeId" : 1,
+    "ifShow" : true,
+    "createTime" : "2016-07-22"
+  }, {
+    "itemId" : 6,
+    "sId" : 1,
+    "pId" : null,
+    "category" : 2,
+    "answerTypeId" : 1,
+    "itemName" : "是否设置物流通道",
+    "itemShowName" : "是否设置物流通道",
+    "itemStandard" : "",
+    "itemNote" : "",
+    "itemTypeId" : 2,
+    "ifShow" : true,
+    "createTime" : "2016-07-22"
+  }, {
+    "itemId" : 7,
+    "sId" : null,
+    "pId" : 6,
+    "category" : 2,
+    "answerTypeId" : 1,
+    "itemName" : "是否按照生进熟出的单一流向",
+    "itemShowName" : "是否按照生进熟出的单一流向",
+    "itemStandard" : "",
+    "itemNote" : "",
+    "itemTypeId" : 2,
+    "ifShow" : true,
+    "createTime" : "2016-07-22"
   } ],
   "tableName" : "insp_items"
 }, {
@@ -51067,9 +51359,99 @@ var Datas;
     "optionName" : "手动关闭门",
     "itemId" : 2,
     "sId" : 1
-  }],
+  } ],
   "tableName" : "insp_options"
-}];
+}, {
+  "content" : [ ],
+  "tableName" : "insp_template"
+}, {
+  "content" : [ ],
+  "tableName" : "insp_template_info"
+}, {
+  "content" : [ {
+    "batchId" : 100001,
+    "itemId" : 1,
+    "value" : "测试结果",
+    "score" : 1.2,
+    "note" : "测试note",
+    "createTime" : "2016-07-22"
+  }, {
+    "batchId" : 100001,
+    "itemId" : 2,
+    "value" : "测试结果",
+    "score" : 1.2,
+    "note" : "测试note",
+    "createTime" : "2016-07-22"
+  }, {
+    "batchId" : 100001,
+    "itemId" : 3,
+    "value" : "测试结果",
+    "score" : 1.2,
+    "note" : "测试note",
+    "createTime" : "2016-07-22"
+  }, {
+    "batchId" : 100001,
+    "itemId" : 4,
+    "value" : "测试结果",
+    "score" : 1.2,
+    "note" : "测试note",
+    "createTime" : "2016-07-22"
+  }, {
+    "batchId" : 100001,
+    "itemId" : 5,
+    "value" : "测试结果",
+    "score" : 1.2,
+    "note" : "测试note",
+    "createTime" : "2016-07-22"
+  }, {
+    "batchId" : 100001,
+    "itemId" : 6,
+    "value" : "测试结果",
+    "score" : 1.2,
+    "note" : "测试note",
+    "createTime" : "2016-07-22"
+  }, {
+    "batchId" : 100001,
+    "itemId" : 7,
+    "value" : "测试结果",
+    "score" : 1.2,
+    "note" : "测试note",
+    "createTime" : "2016-07-22"
+  }, {
+    "batchId" : 100001,
+    "itemId" : 8,
+    "value" : "测试结果",
+    "score" : 1.2,
+    "note" : "测试note",
+    "createTime" : "2016-07-22"
+  }, {
+    "batchId" : 100001,
+    "itemId" : 9,
+    "value" : "测试结果",
+    "score" : 1.2,
+    "note" : "测试note",
+    "createTime" : "2016-07-22"
+  }, {
+    "batchId" : 100001,
+    "itemId" : 10,
+    "value" : "测试结果",
+    "score" : 1.2,
+    "note" : "测试note",
+    "createTime" : "2016-07-22"
+  } ],
+  "tableName" : "inspections"
+}, {
+  "content" : [ {
+    "inspectorId" : 1,
+    "inspectorName" : "杨丽",
+    "inspectorEmail" : "777",
+    "inspectorPhone" : "78787878",
+    "inspectorPassword" : null,
+    "inspectorMd5" : null,
+    "inspectorLoginTime" : null
+  } ],
+  "tableName" : "inspectors"
+} ];
  this.getData=function(){
  	return this.data;
  };

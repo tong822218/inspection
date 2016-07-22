@@ -108,13 +108,44 @@
 	margin-top: 52px;
 	width: 100%;
 }
-.content .hasimg .imgs img{
+.content .hasimg .imgs{
+	text-align: left;
+	margin-top: 52px;
+	width: 100%;
+	display: flex;
+}
+.content .hasimg .imgs div{
+	border: solid 1px;
+	width: 80px;
+	height: 80px;
+}
+.content .hasimg .imgs a {
+	display: inline-block;
+	width: 100%;
+	height: 78px;
+	margin-top: 4px;
+	position: relative;
+	overflow: hidden;
+	background: url(../img/isp_add.png) no-repeat;
+	background-size: contain;
+	
+}
+
+.content .hasimg .imgs a input {
+	position: absolute;
+	right: 0;
+	top: 0;
+	font-size: 100px;
+	opacity: 0;
+	filter: alpha(opacity=0);
+}
+/*.content .hasimg .imgs img{
 	margin-right: 20px;
 	width: 108px;
 	height: 108px;
 	border: solid 2px #999;
 	
-}
+}*/
 
 /*单选*/
 .content .radio{
