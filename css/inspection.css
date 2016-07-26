@@ -53,6 +53,7 @@
 }
 .question .text{
 	height: auto;
+	text-align: center;
 	margin:5px 0 15px 0;
 	padding: 15px 33px;
 }
@@ -113,17 +114,20 @@
 	margin-top: 52px;
 	width: 100%;
 	display: flex;
+	flex-wrap: wrap;
 }
 .content .hasimg .imgs div{
-	border: solid 1px;
 	width: 80px;
 	height: 80px;
+	margin-left: 10px;
+	margin-bottom: 10px;
 }
 .content .hasimg .imgs a {
 	display: inline-block;
 	width: 100%;
 	height: 78px;
-	margin-top: 4px;
+	margin-top: 0px;
+	margin-left: 2px;
 	position: relative;
 	overflow: hidden;
 	background: url(../img/isp_add.png) no-repeat;
@@ -189,6 +193,15 @@
 	line-height: 55px;
 	width: 27px;
 	height: 27px;
+}
+
+.content .submit{
+	display: none;
+	width: 233px;
+	height: 63px;
+	margin: 150px auto;
+	background: url(../img/isp_submit.png) no-repeat;
+	background-size: contain;
 }
 /*中间内容部分结束*/
 .line{

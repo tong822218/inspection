@@ -5,7 +5,8 @@ var itemTypes = ''; //所有检查大项
 var list = []; //每个检查大项下的检查项
 var currentTypeIndex = 0; //当前检测大项的index
 var currentIdex = 0; //当前list 的 index;
-
+var batchId='';//检测批次id
+//初始化数据库以及数据
 var mydb = new DataBase({
 	dbName: "escort_inspection",
 	version: "5",
@@ -27,9 +28,9 @@ var mydb = new DataBase({
 		}
 	}, 200);
 });
-
+//根据检查大项的index获取检测子项
 function getItemsByType() {
-	list=[];
+	list = [];
 	for(var i = 0; i < items.length; i++) {
 		if(itemTypes[currentTypeIndex]['itemTypeId'] == items[i]['itemTypeId']) {
 			list.push(items[i]);
@@ -40,13 +41,13 @@ function getItemsByType() {
 //初始化dom
 function initDom() {
 	hideAll();
-	currentIdex=0;
-	if(currentTypeIndex==(itemTypes.length-1)){
+	currentIdex = 0;
+	if(currentTypeIndex == itemTypes.length) {
 		return;
 	}
-	
+
 	getItemsByType();
-	
+
 	if(list[0]['answerTypeId'] == 1) {
 		$(".content .text").css({
 			"display": "block"
@@ -70,10 +71,12 @@ function initDom() {
 //重新加载页面
 function reLoadDom(result) {
 	hideAll();
+	var flag=false;
 	for(var i = 0; i < itemRules.length; i++) {
 		if(itemRules[i]['itemResult'] == result && itemRules[i]['itemId'] == list[currentIdex]['itemId']) {
 			for(var j = 0; j < list.length; j++) {
 				if(list[j]['itemId'] == itemRules[i]['childItemId']) {
+					flag=true;
 					var item = items[j];
 					if(item['answerTypeId'] == 1) {
 						$(".content .text").css({
@@ -99,8 +102,21 @@ function reLoadDom(result) {
 
 		}
 	}
+	if(!flag){
+		isLastpage();
+	}
 	currentIdex += 1;
 
+}
+//显示提交页面
+function lastPage() {
+	hideAll();
+	$(".content .submit").css({
+		"display": "block"
+	});
+	$(".question .text").html('<font style="font-size:33px;color: #fff;line-height:60px;">已全部审核完毕 !</font>');
+	$(".button .pre").css({"display":"none"});
+	$(".button .next").css({"display":"none"});
 }
 //上一题
 function pre() {
@@ -114,12 +130,19 @@ function pre() {
 }
 //下一题
 function next() {
+	
 	var result = $("#result").val();
-	if(list[currentIdex]['answerTypeId']==1) {
-		initDom();
+	var imgs = $("#imgs").val();
+	if(result!=""){
+		savaItem(result,imgs);
+	}
+	
+	if(list[currentIdex]['answerTypeId'] == 1) {
+		isLastpage();
+
 	} else {
 		if(currentIdex > items.length - 1) {
-			initDom();
+			isLastpage();
 		}
 		reLoadDom(result);
 	}
@@ -127,8 +150,63 @@ function next() {
 	$("#imgs").val("");
 
 }
-
-
+//将本条的检测结果缓存到本地
+function savaItem(result,imgs){
+	var itemId=list[currentIdex]['id'];
+	var item={"itemId":itemId,"value":result};
+	if(batchId==''){
+		batchId=$("#batchId").val();
+	}
+	var res = localStorage.getItem(batchId);
+	if(res==null){
+		res={items:[],photos:[]};
+		res.items.push(item);
+		var ims=imgs.split("$$");
+		for(var i=0;i<ims.length;i++){
+			if(ims[i]!=''){
+				var photo={"itemId":itemId,"image":ims[i]};
+				res.photos.push(photo);
+			}
+		}
+	}else{
+		res=JSON.parse(res);
+		var items=res['items'];
+		var photos=res['photos'];
+		
+		var flag=false;
+		for(var i=0;i<items.length;i++){
+			if(items[i]['itemId']==itemId){
+				flag=true;
+				items[i]=item;
+			}
+		}
+		if(!flag){
+			items.push(item);
+			flag=false;
+		}
+		for(var i=0;i<photos.length;i++){
+			if(photos[i]['itemId']==itemId){
+				photos.splice(i,1);
+			}
+		}
+		if(!flag){
+			var ims=imgs.split("$$");
+			for(var i=0;i<ims.length;i++){
+				if(ims[i]!=''){
+					var photo={"itemId":itemId,"image":ims[i]};
+					res.photos.push(photo);
+				}
+			}
+		}
+		
+		res['items']=items;
+		res['photos']=photos;
+	}
+	
+	var str = JSON.stringify(res);
+	localStorage.setItem(batchId,str);
+}
+//隐藏所有检查项
 function hideAll() {
 	$(".content .text").css({
 		"display": "none"
@@ -142,6 +220,14 @@ function hideAll() {
 	$(".content .multiselect").css({
 		"display": "none"
 	});
+}
+//判断是不是最后一个检查大项，如果是就跳到提交页面，不是跳到下一个检测大项
+function isLastpage(){
+	if(currentTypeIndex == itemTypes.length) { //如果是最后一个检测大项了直接跳到提交页面
+			lastPage();
+		} else {
+			initDom();
+		}
 }
 //输入问题改变时
 function changeResult(dom, sta) {
@@ -158,35 +244,44 @@ function changeResult(dom, sta) {
 
 }
 //单选
-function selOne(sta){
-	if(sta==1){
-		$("#radio-yes img").attr("src","img/isp_yes.png");	
-		$("#radio-no img").attr("src","img/isp_nosel.png");	
+function selOne(sta) {
+	if(sta == 1) {
+		$("#radio-yes img").attr("src", "img/isp_yes.png");
+		$("#radio-no img").attr("src", "img/isp_nosel.png");
 		$("#result").val("1");
-	}else{
-		$("#radio-no img").attr("src","img/isp_no.png");	
-		$("#radio-yes img").attr("src","img/isp_nosel.png");	
+	} else {
+		$("#radio-no img").attr("src", "img/isp_no.png");
+		$("#radio-yes img").attr("src", "img/isp_nosel.png");
 		$("#result").val("0");
 	}
 }
 //多选
-function selMul(obj){
-	var rel=$("#result").val();
-	var re=$(obj).find("span").html();
-	re+="$";
-	if($(obj).find('img').attr("src")=='img/isp_sel.png'){
-		$(obj).find('img').attr("src","img/isp_nosel.png");
-		var s=rel.replace(re,"");
+function selMul(obj) {
+	var rel = $("#result").val();
+	var re = $(obj).find("span").html();
+	re += "$";
+	if($(obj).find('img').attr("src") == 'img/isp_sel.png') {
+		$(obj).find('img').attr("src", "img/isp_nosel.png");
+		var s = rel.replace(re, "");
 		$("#result").val(s);
-	}else{
-		$(obj).find('img').attr("src","img/isp_sel.png");
-		$("#result").val(rel+=re);
+	} else {
+		$(obj).find('img').attr("src", "img/isp_sel.png");
+		$("#result").val(rel += re);
 	}
 }
+//有图片的检测类型文本框获取焦点时清空提示字
+function hasimgOnFocus(obj) {
+	if($(obj).html() == '请输入描述') {
+		$(obj).html('');
+	}
+}
+//有图片的检测类型文本框失去焦点时，将内容存入隐藏的文本框中
+function hasimgOnBlur(obj) {
+	var im = $(obj).html();
+	$("#result").val(im);
+}
 
-
-
-//-------------------------------------图片处理---------------------------------------------------------------------------------------
+//-------------------------------------图片处理，压缩，转换base64等---------------------------------------------------------------------------------------
 
 // 文件上传时触发
 function fileChange(e, idx) {
@@ -198,42 +293,47 @@ function fileChange(e, idx) {
 	FR.onload = function(f) {
 		compressImg(this.result, 800, function(data) {
 			$(_this).parent().css({
-				"background" : "url('" + data + "') no-repeat",
-				"background-size" : "contain"
+				"background": "url('" + data + "') no-repeat",
+				"background-size": "contain"
 			}); // 保存图片压缩后的64位编码
-//			var ss = $(_this).parent().get(0).id;
-//			$("#a" + (ss.slice(-1) * 1 + 1)).css({
-//				"display" : "block"
-//			});// 在下一个位置显示加号图片
-//			imgArr.push(data);
-//			e.addEventListener('click', a, false);
-//			$(_this).click({
-//				"ind" : ss.slice(-1) * 1 - 1
-//			}, openBig);
-//			$("#img" + idx).val(data);
-//			var id = $("#imgid" + idx).val();
-//			if (id != undefined && id != "") {
-//				var value = $("#originalImages").val();
-//				$("#originalImages").val(value + id + ",");
-//			}
+			var html = $(".imgs").html();
+			html += '<div><a> <input type="file" onchange="fileChange(this,1)" /> </a></div>';
+			$(".imgs").html(html);
+			var im = $("#imgs").val();
+			im += data;
+			im += '$$';
+			$("#imgs").val(im);
+			//			var ss = $(_this).parent().get(0).id;
+			//			$("#a" + (ss.slice(-1) * 1 + 1)).css({
+			//				"display" : "block"
+			//			});// 在下一个位置显示加号图片
+			//			imgArr.push(data);
+			//			e.addEventListener('click', a, false);
+			//			$(_this).click({
+			//				"ind" : ss.slice(-1) * 1 - 1
+			//			}, openBig);
+			//			$("#img" + idx).val(data);
+			//			var id = $("#imgid" + idx).val();
+			//			if (id != undefined && id != "") {
+			//				var value = $("#originalImages").val();
+			//				$("#originalImages").val(value + id + ",");
+			//			}
 		});
 	};
 }
 
-
 // 将图片压缩转成64base
 function compressImg(imgData, maxHeight, onCompress) {
-	if (!imgData)
+	if(!imgData)
 		return false;
-	onCompress = onCompress || function() {
-	};
+	onCompress = onCompress || function() {};
 	maxHeight = maxHeight || 800; // 默认最大高度800px
 	var canvas = document.createElement('canvas');
 	var img = new Image();
 	img.src = imgData;
 
 	img.onload = function() {
-		if (img.height > maxHeight) { // 按最大高度等比缩放
+		if(img.height > maxHeight) { // 按最大高度等比缩放
 			img.width *= maxHeight / img.height;
 			img.height = maxHeight;
 		}

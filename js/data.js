@@ -51292,61 +51292,7 @@ var Datas;
   }, {
     "itemTypeId" : 2,
     "itemTypeName" : "是否设置物流通道"
-  }, {
-    "itemTypeId" : 3,
-    "itemTypeName" : "是否有防蝇灭蝇措施"
-  }, {
-    "itemTypeId" : 4,
-    "itemTypeName" : "设备设施是否干净，防止在存放、操作中产生交叉污染"
-  }, {
-    "itemTypeId" : 5,
-    "itemTypeName" : "是否有排烟设施"
-  }, {
-    "itemTypeId" : 6,
-    "itemTypeName" : "是否有窗？"
-  }, {
-    "itemTypeId" : 7,
-    "itemTypeName" : "地面是否有排水沟"
-  }, {
-    "itemTypeId" : 8,
-    "itemTypeName" : "天花板是否有平整的吊顶"
-  }, {
-    "itemTypeId" : 9,
-    "itemTypeName" : "天花板是否有掉落异物的风险"
-  }, {
-    "itemTypeId" : 10,
-    "itemTypeName" : "查看人员穿着工服是否干净"
-  }, {
-    "itemTypeId" : 11,
-    "itemTypeName" : "查看岗位人员未带口罩"
-  }, {
-    "itemTypeId" : 12,
-    "itemTypeName" : "查看常温储存区域"
-  }, {
-    "itemTypeId" : 13,
-    "itemTypeName" : "是否使用化学品"
-  }, {
-    "itemTypeId" : 14,
-    "itemTypeName" : "是否使用添加剂"
-  }, {
-    "itemTypeId" : 15,
-    "itemTypeName" : "是否识别不合格品"
-  }, {
-    "itemTypeId" : 16,
-    "itemTypeName" : "查看是否有冷藏柜"
-  }, {
-    "itemTypeId" : 17,
-    "itemTypeName" : "查看是否有冷冻柜"
-  }, {
-    "itemTypeId" : 18,
-    "itemTypeName" : "查看是否制作裱花蛋糕、凉菜、生食水产品？"
-  }, {
-    "itemTypeId" : 19,
-    "itemTypeName" : "加工岗位"
-  }, {
-    "itemTypeId" : 20,
-    "itemTypeName" : "清洗消毒"
-  } ],
+  }],
   "tableName" : "insp_item_type"
 }, {
   "content" : [ {
