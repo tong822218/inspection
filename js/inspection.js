@@ -5,7 +5,7 @@ var itemTypes = ''; //所有检查大项
 var list = []; //每个检查大项下的检查项
 var currentTypeIndex = 0; //当前检测大项的index
 var currentIdex = 0; //当前list 的 index;
-var batchId='';//检测批次id
+var batchId = ''; //检测批次id
 //初始化数据库以及数据
 var mydb = new DataBase({
 	dbName: "escort_inspection",
@@ -65,19 +65,67 @@ function initDom() {
 			"display": "flex"
 		});
 	}
-	$(".question .text .big").html(list[0]['itemName']);
+	$(".question .text .big").html(list[0]['itemShowName']);
 	$(".question .text .little").html(list[0]['itemStandard']);
 }
-//重新加载页面
-function reLoadDom(result) {
+//加载上一页面
+function LoadPreDom(preItem,preItemImg) {
 	hideAll();
-	var flag=false;
+	var item;
+	for(var i = 0; i < list.length; i++) {
+		if(list[i]['id'] == preItem['itemId']) {
+			item = list[i];
+		}
+	}
+	if(item != null && item != undefined) {
+		if(item['answerTypeId'] == 1) {
+			$(".content .text").css({
+				"display": "block"
+			});
+			$("#result").val(preItem['value']);
+		} else if(item['answerTypeId'] == 2) {
+			$(".content .hasimg").css({
+				"display": "block"
+			});
+			$("#result").val(preItem['value']);
+			var html1='';
+			var html = $(".imgs").html();
+			var im='';
+			for(var i=0;i<preItemImgre.length;i++){
+				html1 += '<div style="background: url("' + preItemImg[i] + '") no-repeat;background-size: contain"><a> <input type="file" onchange="fileChange(this,1)" /> </a></div>';
+				im += preItemImg[i];
+				im += '$$';
+			}
+			html1+=html;
+			$(".imgs").html(html1);
+			$("#imgs").val(im);
+		} else if(item['answerTypeId'] == 3) {
+			$(".content .radio").css({
+				"display": "block"
+			});
+			$("#result").val(preItem['value']);
+		} else if(item['answerTypeId'] == 4) {
+			$(".content .multiselect").css({
+				"display": "flex"
+			});
+			$("#result").val(preItem['value']);
+		}
+		$(".question .text .big").html(item['itemShowName']);
+		$(".question .text .little").html(item['itemStandard']);
+		currentIdex -= 1;
+	}
+
+}
+//加载下一页面
+function LoadNextDom(result) {
+	hideAll();
+	var flag = false;
 	for(var i = 0; i < itemRules.length; i++) {
 		if(itemRules[i]['itemResult'] == result && itemRules[i]['itemId'] == list[currentIdex]['itemId']) {
 			for(var j = 0; j < list.length; j++) {
 				if(list[j]['itemId'] == itemRules[i]['childItemId']) {
-					flag=true;
-					var item = items[j];
+					flag = true;
+					var item = list[j];
 					if(item['answerTypeId'] == 1) {
 						$(".content .text").css({
 							"display": "block"
@@ -95,14 +143,14 @@ function reLoadDom(result) {
 							"display": "flex"
 						});
 					}
-					$(".question .text .big").html(item['itemName']);
+					$(".question .text .big").html(item['itemShowName']);
 					$(".question .text .little").html(item['itemStandard']);
 				}
 			}
 
 		}
 	}
-	if(!flag){
+	if(!flag) {
 		isLastpage();
 	}
 	currentIdex += 1;
@@ -115,28 +163,51 @@ function lastPage() {
 		"display": "block"
 	});
 	$(".question .text").html('<font style="font-size:33px;color: #fff;line-height:60px;">已全部审核完毕 !</font>');
-	$(".button .pre").css({"display":"none"});
-	$(".button .next").css({"display":"none"});
+	$(".button .pre").css({
+		"display": "none"
+	});
+	$(".button .next").css({
+		"display": "none"
+	});
 }
 //上一题
 function pre() {
-	$("#result").val("");
-	$("#imgs").val("");
-	currentIdex -= 1
-	if(currentIdex < 0) {
-		currentIdex = 0;
+	
+	var res = localStorage.getItem(batchId);
+	if(res != null && res != undefined && res != '') {
+		$("#result").val("");
+		$("#imgs").val("");
+		res = JSON.parse(res);
+		var items = res['items'];
+		var photos = res['photos'];
+		var itemId = list[currentIdex]['id'];
+		var preItem;
+		var preItemImg=[];
+		for(var i = 0; i < items.length; i++) {
+			if(items[i]['itemId'] == itemId) {
+				preItemId = items[i - 1 < 0 ? 0 : i - 1];
+			}
+		}
+		for(var i=0;i<photos.length;i++){
+			if(photos[i]==itemId){
+				preItemImg.push(photos[i]['image']);
+			}
+		}
+		if(preItem != null && preItem != undefined) {
+			LoadPreDom(preItem,preItemImg);
+		}
 	}
-	reLoadDom();
+
 }
 //下一题
 function next() {
-	
+
 	var result = $("#result").val();
 	var imgs = $("#imgs").val();
-	if(result!=""){
-		savaItem(result,imgs);
+	if(result != "") {
+		savaItem(result, imgs);
 	}
-	
+
 	if(list[currentIdex]['answerTypeId'] == 1) {
 		isLastpage();
 
@@ -144,67 +215,77 @@ function next() {
 		if(currentIdex > items.length - 1) {
 			isLastpage();
 		}
-		reLoadDom(result);
+		LoadNextDom(result);
 	}
 	$("#result").val("");
 	$("#imgs").val("");
 
 }
 //将本条的检测结果缓存到本地
-function savaItem(result,imgs){
-	var itemId=list[currentIdex]['id'];
-	var item={"itemId":itemId,"value":result};
-	if(batchId==''){
-		batchId=$("#batchId").val();
+function savaItem(result, imgs) {
+	var itemId = list[currentIdex]['id'];
+	var item = {
+		"itemId": itemId,
+		"value": result
+	};
+	if(batchId == '') {
+		batchId = $("#batchId").val();
 	}
 	var res = localStorage.getItem(batchId);
-	if(res==null){
-		res={items:[],photos:[]};
+	if(res == null) {
+		res = {
+			items: [],
+			photos: []
+		};
 		res.items.push(item);
-		var ims=imgs.split("$$");
-		for(var i=0;i<ims.length;i++){
-			if(ims[i]!=''){
-				var photo={"itemId":itemId,"image":ims[i]};
+		var ims = imgs.split("$$");
+		for(var i = 0; i < ims.length; i++) {
+			if(ims[i] != '') {
+				var photo = {
+					"itemId": itemId,
+					"image": ims[i]
+				};
 				res.photos.push(photo);
 			}
 		}
-	}else{
-		res=JSON.parse(res);
-		var items=res['items'];
-		var photos=res['photos'];
-		
-		var flag=false;
-		for(var i=0;i<items.length;i++){
-			if(items[i]['itemId']==itemId){
-				flag=true;
-				items[i]=item;
+	} else {
+		res = JSON.parse(res);
+		var items = res['items'];
+		var photos = res['photos'];
+
+		var flag = false;
+		for(var i = 0; i < items.length; i++) {
+			if(items[i]['itemId'] == itemId) {
+				flag = true;
+				items[i] = item;
 			}
 		}
-		if(!flag){
+		if(!flag) {
 			items.push(item);
-			flag=false;
-		}
-		for(var i=0;i<photos.length;i++){
-			if(photos[i]['itemId']==itemId){
-				photos.splice(i,1);
-			}
-		}
-		if(!flag){
-			var ims=imgs.split("$$");
-			for(var i=0;i<ims.length;i++){
-				if(ims[i]!=''){
-					var photo={"itemId":itemId,"image":ims[i]};
-					res.photos.push(photo);
-				}
-			}
 		}
 		
-		res['items']=items;
-		res['photos']=photos;
+		for(var i = 0; i < photos.length; i++) {
+			if(photos[i]['itemId'] == itemId) {
+				photos.splice(i, 1);
+			}
+		}
+		var ims = imgs.split("$$");
+		for(var i = 0; i < ims.length; i++) {
+			if(ims[i] != '') {
+				var photo = {
+					"itemId": itemId,
+					"image": ims[i]
+				};
+				res.photos.push(photo);
+			}
+		}
+
+		res['items'] = items;
+		res['photos'] = photos;
 	}
-	
+
 	var str = JSON.stringify(res);
-	localStorage.setItem(batchId,str);
+	localStorage.setItem(batchId, str);
 }
 //隐藏所有检查项
 function hideAll() {
@@ -222,12 +303,12 @@ function hideAll() {
 	});
 }
 //判断是不是最后一个检查大项，如果是就跳到提交页面，不是跳到下一个检测大项
-function isLastpage(){
+function isLastpage() {
 	if(currentTypeIndex == itemTypes.length) { //如果是最后一个检测大项了直接跳到提交页面
-			lastPage();
-		} else {
-			initDom();
-		}
+		lastPage();
+	} else {
+		initDom();
+	}
 }
 //输入问题改变时
 function changeResult(dom, sta) {
