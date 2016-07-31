@@ -6,6 +6,7 @@ var list = []; //每个检查大项下的检查项
 var currentTypeIndex = 0; //当前检测大项的index
 var currentIdex = 0; //当前list 的 index;
 var batchId = ''; //检测批次id
+var currentId;//list中当前的item 的id
 //初始化数据库以及数据
 var mydb = new DataBase({
 	dbName: "escort_inspection",
@@ -208,14 +209,15 @@ function next() {
 		savaItem(result, imgs);
 	}
 
-	if(list[currentIdex]['answerTypeId'] == 1) {
+	if(list[currentIdex] && list[currentIdex]['answerTypeId'] == 1) {
 		isLastpage();
-
 	} else {
-		if(currentIdex > items.length - 1) {
+		if(list[currentIdex] && list[currentIdex]['sId']!=null && list[currentIdex]['sId']!='null') {
+			LoadNextDom(result);
+		}else{
 			isLastpage();
 		}
-		LoadNextDom(result);
+		
 	}
 	$("#result").val("");
 	$("#imgs").val("");

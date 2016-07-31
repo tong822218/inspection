@@ -51150,161 +51150,360 @@ var Datas;
   "tableName" : "insp_batch"
 }, {
   "content" : [ {
-    "ruleId" : 1,
-    "itemId" : 1,
-    "itemName" : "是否有与外界相连的门？",
+    "ruleId" : 6,
+    "itemId" : 15,
+    "itemName" : "是否有窗？",
     "answerTypeId" : 1,
     "itemResult" : "1",
-    "childItemId" : 2,
-    "childItemName" : "是什么门"
+    "childItemId" : 16,
+    "childItemName" : "是否可开启？"
   }, {
-    "ruleId" : 2,
-    "itemId" : 2,
-    "itemName" : "是什么门",
-    "answerTypeId" : 2,
-    "itemResult" : "自动回弹门",
-    "childItemId" : 3,
-    "childItemName" : "是否能自动回弹"
-  }, {
-    "ruleId" : 3,
-    "itemId" : 2,
-    "itemName" : "是什么门",
-    "answerTypeId" : 2,
-    "itemResult" : "手动关闭门",
-    "childItemId" : 4,
-    "childItemName" : "是否保持关闭"
-  }, {
-    "ruleId" : 4,
-    "itemId" : 3,
-    "itemName" : "是否能自动回弹",
-    "answerTypeId" : 1,
-    "itemResult" : "0",
-    "childItemId" : 5,
-    "childItemName" : "是否人为因素"
-  }, {
-    "ruleId" : 5,
-    "itemId" : 6,
-    "itemName" : "是否设置物流通道",
+    "ruleId" : 7,
+    "itemId" : 16,
+    "itemName" : "是否可开启？",
     "answerTypeId" : 1,
     "itemResult" : "1",
-    "childItemId" : 7,
-    "childItemName" : "是否按照生进熟出的单一流向"
+    "childItemId" : 17,
+    "childItemName" : "是否有纱窗"
+  }, {
+    "ruleId" : 8,
+    "itemId" : 17,
+    "itemName" : "是否有纱窗",
+    "answerTypeId" : 1,
+    "itemResult" : "1",
+    "childItemId" : 18,
+    "childItemName" : "是否清洁无破损"
+  }, {
+    "ruleId" : 9,
+    "itemId" : 20,
+    "itemName" : "地面是否有排水沟",
+    "answerTypeId" : 1,
+    "itemResult" : "1",
+    "childItemId" : 21,
+    "childItemName" : "隔栅盖是否完好"
+  }, {
+    "ruleId" : 10,
+    "itemId" : 20,
+    "itemName" : "地面是否有排水沟",
+    "answerTypeId" : 1,
+    "itemResult" : "1",
+    "childItemId" : 22,
+    "childItemName" : "排水沟是否清洁？"
+  }, {
+    "ruleId" : 11,
+    "itemId" : 20,
+    "itemName" : "地面是否有排水沟",
+    "answerTypeId" : 1,
+    "itemResult" : "1",
+    "childItemId" : 23,
+    "childItemName" : "是否有异味"
   } ],
   "tableName" : "insp_item_rules"
 }, {
   "content" : [ {
-    "itemId" : 1,
+    "itemId" : 11,
     "sId" : null,
     "pId" : null,
     "category" : 1,
-    "answerTypeId" : 2,
-    "itemName" : "是否有与外界相连的门？",
-    "itemShowName" : "",
-    "itemStandard" : "",
-    "itemNote" : "",
-    "itemTypeId" : 1,
-    "ifShow" : true,
-    "createTime" : "2016-07-13"
-  }, {
-    "itemId" : 2,
-    "sId" : null,
-    "pId" : 1,
-    "category" : 2,
-    "answerTypeId" : 2,
-    "itemName" : "是什么门",
-    "itemShowName" : "",
-    "itemStandard" : "",
-    "itemNote" : "",
-    "itemTypeId" : 1,
-    "ifShow" : true,
-    "createTime" : "2016-07-13"
-  }, {
-    "itemId" : 3,
-    "sId" : null,
-    "pId" : 2,
-    "category" : 2,
     "answerTypeId" : 1,
-    "itemName" : "是否能自动回弹",
-    "itemShowName" : "",
+    "itemName" : "与外界相连的门是否关闭？",
+    "itemShowName" : "与外界相连的门是否关闭？",
     "itemStandard" : "",
     "itemNote" : "",
-    "itemTypeId" : 1,
+    "itemTypeId" : 21,
     "ifShow" : true,
-    "createTime" : "2016-07-13"
+    "createTime" : "2016-07-29"
   }, {
-    "itemId" : 4,
-    "sId" : 3,
-    "pId" : 2,
-    "category" : 2,
-    "answerTypeId" : 1,
-    "itemName" : "是否保持关闭",
-    "itemShowName" : "",
-    "itemStandard" : "",
-    "itemNote" : "",
-    "itemTypeId" : 1,
-    "ifShow" : true,
-    "createTime" : "2016-07-13"
-  }, {
-    "itemId" : 5,
-    "sId" : null,
-    "pId" : 3,
-    "category" : 2,
-    "answerTypeId" : 1,
-    "itemName" : "是否人为因素",
-    "itemShowName" : "是否人为因素",
-    "itemStandard" : "",
-    "itemNote" : "",
-    "itemTypeId" : 1,
-    "ifShow" : true,
-    "createTime" : "2016-07-22"
-  }, {
-    "itemId" : 6,
-    "sId" : 1,
+    "itemId" : 12,
+    "sId" : 11,
     "pId" : null,
-    "category" : 2,
-    "answerTypeId" : 1,
-    "itemName" : "是否设置物流通道",
-    "itemShowName" : "是否设置物流通道",
+    "category" : 1,
+    "answerTypeId" : 2,
+    "itemName" : "厨房门的类型",
+    "itemShowName" : "厨房门的类型",
     "itemStandard" : "",
     "itemNote" : "",
-    "itemTypeId" : 2,
+    "itemTypeId" : 22,
     "ifShow" : true,
-    "createTime" : "2016-07-22"
+    "createTime" : "2016-07-29"
   }, {
-    "itemId" : 7,
-    "sId" : null,
-    "pId" : 6,
-    "category" : 2,
+    "itemId" : 13,
+    "sId" : 12,
+    "pId" : null,
+    "category" : 1,
     "answerTypeId" : 1,
-    "itemName" : "是否按照生进熟出的单一流向",
-    "itemShowName" : "是否按照生进熟出的单一流向",
+    "itemName" : "是否有独立的收餐窗（口）",
+    "itemShowName" : "是否有独立的收餐窗（口）",
     "itemStandard" : "",
     "itemNote" : "",
-    "itemTypeId" : 2,
+    "itemTypeId" : 23,
     "ifShow" : true,
-    "createTime" : "2016-07-22"
+    "createTime" : "2016-07-29"
+  }, {
+    "itemId" : 14,
+    "sId" : 13,
+    "pId" : null,
+    "category" : 1,
+    "answerTypeId" : 1,
+    "itemName" : "是否有出菜窗（口）",
+    "itemShowName" : "是否有出菜窗（口）",
+    "itemStandard" : "",
+    "itemNote" : "",
+    "itemTypeId" : 24,
+    "ifShow" : true,
+    "createTime" : "2016-07-29"
+  }, {
+    "itemId" : 15,
+    "sId" : 14,
+    "pId" : null,
+    "category" : 1,
+    "answerTypeId" : 1,
+    "itemName" : "是否有窗？",
+    "itemShowName" : "是否有窗？",
+    "itemStandard" : "",
+    "itemNote" : "",
+    "itemTypeId" : 25,
+    "ifShow" : true,
+    "createTime" : "2016-07-29"
+  }, {
+    "itemId" : 16,
+    "sId" : null,
+    "pId" : 15,
+    "category" : 2,
+    "answerTypeId" : 1,
+    "itemName" : "是否可开启？",
+    "itemShowName" : "是否可开启？",
+    "itemStandard" : "",
+    "itemNote" : "",
+    "itemTypeId" : 25,
+    "ifShow" : true,
+    "createTime" : "2016-07-29"
+  }, {
+    "itemId" : 17,
+    "sId" : null,
+    "pId" : 16,
+    "category" : 2,
+    "answerTypeId" : 1,
+    "itemName" : "是否有纱窗",
+    "itemShowName" : "是否有纱窗",
+    "itemStandard" : "",
+    "itemNote" : "",
+    "itemTypeId" : 25,
+    "ifShow" : true,
+    "createTime" : "2016-07-29"
+  }, {
+    "itemId" : 18,
+    "sId" : null,
+    "pId" : 17,
+    "category" : 2,
+    "answerTypeId" : 1,
+    "itemName" : "是否清洁无破损",
+    "itemShowName" : "是否清洁无破损",
+    "itemStandard" : "",
+    "itemNote" : "",
+    "itemTypeId" : 25,
+    "ifShow" : true,
+    "createTime" : "2016-07-29"
+  }, {
+    "itemId" : 20,
+    "sId" : 15,
+    "pId" : null,
+    "category" : 1,
+    "answerTypeId" : 1,
+    "itemName" : "地面是否有排水沟",
+    "itemShowName" : "地面是否有排水沟",
+    "itemStandard" : "",
+    "itemNote" : "",
+    "itemTypeId" : 26,
+    "ifShow" : true,
+    "createTime" : "2016-07-29"
+  }, {
+    "itemId" : 21,
+    "sId" : null,
+    "pId" : 20,
+    "category" : 2,
+    "answerTypeId" : 1,
+    "itemName" : "隔栅盖是否完好",
+    "itemShowName" : "隔栅盖是否完好",
+    "itemStandard" : "",
+    "itemNote" : "",
+    "itemTypeId" : 26,
+    "ifShow" : true,
+    "createTime" : "2016-07-29"
+  }, {
+    "itemId" : 22,
+    "sId" : null,
+    "pId" : 20,
+    "category" : 2,
+    "answerTypeId" : 1,
+    "itemName" : "排水沟是否清洁？",
+    "itemShowName" : "排水沟是否清洁？",
+    "itemStandard" : "",
+    "itemNote" : "",
+    "itemTypeId" : 26,
+    "ifShow" : true,
+    "createTime" : "2016-07-29"
+  }, {
+    "itemId" : 23,
+    "sId" : null,
+    "pId" : 20,
+    "category" : 2,
+    "answerTypeId" : 1,
+    "itemName" : "是否有异味",
+    "itemShowName" : "是否有异味",
+    "itemStandard" : "",
+    "itemNote" : "",
+    "itemTypeId" : 26,
+    "ifShow" : true,
+    "createTime" : "2016-07-29"
+  }, {
+    "itemId" : 24,
+    "sId" : 20,
+    "pId" : null,
+    "category" : 1,
+    "answerTypeId" : 1,
+    "itemName" : "天花板是否有平整的吊顶",
+    "itemShowName" : "天花板是否有平整的吊顶",
+    "itemStandard" : "",
+    "itemNote" : "",
+    "itemTypeId" : 27,
+    "ifShow" : true,
+    "createTime" : "2016-07-29"
+  }, {
+    "itemId" : 25,
+    "sId" : 24,
+    "pId" : null,
+    "category" : 1,
+    "answerTypeId" : 3,
+    "itemName" : "天花板是否有掉落异物的风险",
+    "itemShowName" : "天花板是否有掉落异物的风险",
+    "itemStandard" : "",
+    "itemNote" : "",
+    "itemTypeId" : 28,
+    "ifShow" : true,
+    "createTime" : "2016-07-29"
+  }, {
+    "itemId" : 26,
+    "sId" : 25,
+    "pId" : null,
+    "category" : 1,
+    "answerTypeId" : 1,
+    "itemName" : "查看人员穿着工服是否干净",
+    "itemShowName" : "查看人员穿着工服是否干净",
+    "itemStandard" : "",
+    "itemNote" : "",
+    "itemTypeId" : 29,
+    "ifShow" : true,
+    "createTime" : "2016-07-29"
+  }, {
+    "itemId" : 27,
+    "sId" : 26,
+    "pId" : null,
+    "category" : 1,
+    "answerTypeId" : 3,
+    "itemName" : "查看岗位人员未带口罩",
+    "itemShowName" : "查看岗位人员未带口罩",
+    "itemStandard" : "",
+    "itemNote" : "",
+    "itemTypeId" : 30,
+    "ifShow" : true,
+    "createTime" : "2016-07-29"
   } ],
   "tableName" : "insp_items"
 }, {
   "content" : [ {
-    "itemTypeId" : 1,
-    "itemTypeName" : "是否有与外界相连的门？"
+    "itemTypeId" : 21,
+    "itemTypeName" : "与外界相连的门是否关闭？"
   }, {
-    "itemTypeId" : 2,
-    "itemTypeName" : "是否设置物流通道"
-  }],
+    "itemTypeId" : 22,
+    "itemTypeName" : "厨房门的类型"
+  }, {
+    "itemTypeId" : 23,
+    "itemTypeName" : "是否有独立的收餐窗（口）"
+  }, {
+    "itemTypeId" : 24,
+    "itemTypeName" : "是否有出菜窗（口）"
+  }, {
+    "itemTypeId" : 25,
+    "itemTypeName" : "是否有窗？"
+  }, {
+    "itemTypeId" : 26,
+    "itemTypeName" : "地面是否有排水沟"
+  }, {
+    "itemTypeId" : 27,
+    "itemTypeName" : "天花板是否有平整的吊顶"
+  }, {
+    "itemTypeId" : 28,
+    "itemTypeName" : "天花板是否有掉落异物的风险"
+  }, {
+    "itemTypeId" : 29,
+    "itemTypeName" : "查看人员穿着工服是否干净"
+  }, {
+    "itemTypeId" : 30,
+    "itemTypeName" : "查看岗位人员未带口罩"
+  } ],
   "tableName" : "insp_item_type"
 }, {
   "content" : [ {
-    "optionId" : 1,
+    "optionId" : 3,
     "optionName" : "自动回弹门",
-    "itemId" : 2,
+    "itemId" : 12,
     "sId" : null
   }, {
-    "optionId" : 2,
+    "optionId" : 4,
     "optionName" : "手动关闭门",
-    "itemId" : 2,
-    "sId" : 1
+    "itemId" : 12,
+    "sId" : 3
+  }, {
+    "optionId" : 5,
+    "optionName" : "害虫隐匿",
+    "itemId" : 25,
+    "sId" : null
+  }, {
+    "optionId" : 6,
+    "optionName" : "灰尘聚集",
+    "itemId" : 25,
+    "sId" : 5
+  }, {
+    "optionId" : 7,
+    "optionName" : "建筑材料",
+    "itemId" : 25,
+    "sId" : 6
+  }, {
+    "optionId" : 8,
+    "optionName" : "冷凝水",
+    "itemId" : 25,
+    "sId" : 7
+  }, {
+    "optionId" : 9,
+    "optionName" : "长霉",
+    "itemId" : 25,
+    "sId" : 8
+  }, {
+    "optionId" : 10,
+    "optionName" : "无",
+    "itemId" : 25,
+    "sId" : 9
+  }, {
+    "optionId" : 11,
+    "optionName" : "出餐",
+    "itemId" : 27,
+    "sId" : null
+  }, {
+    "optionId" : 12,
+    "optionName" : "热加工",
+    "itemId" : 27,
+    "sId" : 11
+  }, {
+    "optionId" : 13,
+    "optionName" : "面点",
+    "itemId" : 27,
+    "sId" : 12
+  }, {
+    "optionId" : 14,
+    "optionName" : "其他岗位",
+    "itemId" : 27,
+    "sId" : 13
   } ],
   "tableName" : "insp_options"
 }, {
@@ -51314,77 +51513,7 @@ var Datas;
   "content" : [ ],
   "tableName" : "insp_template_info"
 }, {
-  "content" : [ {
-    "batchId" : 100001,
-    "itemId" : 1,
-    "value" : "测试结果",
-    "score" : 1.2,
-    "note" : "测试note",
-    "createTime" : "2016-07-22"
-  }, {
-    "batchId" : 100001,
-    "itemId" : 2,
-    "value" : "测试结果",
-    "score" : 1.2,
-    "note" : "测试note",
-    "createTime" : "2016-07-22"
-  }, {
-    "batchId" : 100001,
-    "itemId" : 3,
-    "value" : "测试结果",
-    "score" : 1.2,
-    "note" : "测试note",
-    "createTime" : "2016-07-22"
-  }, {
-    "batchId" : 100001,
-    "itemId" : 4,
-    "value" : "测试结果",
-    "score" : 1.2,
-    "note" : "测试note",
-    "createTime" : "2016-07-22"
-  }, {
-    "batchId" : 100001,
-    "itemId" : 5,
-    "value" : "测试结果",
-    "score" : 1.2,
-    "note" : "测试note",
-    "createTime" : "2016-07-22"
-  }, {
-    "batchId" : 100001,
-    "itemId" : 6,
-    "value" : "测试结果",
-    "score" : 1.2,
-    "note" : "测试note",
-    "createTime" : "2016-07-22"
-  }, {
-    "batchId" : 100001,
-    "itemId" : 7,
-    "value" : "测试结果",
-    "score" : 1.2,
-    "note" : "测试note",
-    "createTime" : "2016-07-22"
-  }, {
-    "batchId" : 100001,
-    "itemId" : 8,
-    "value" : "测试结果",
-    "score" : 1.2,
-    "note" : "测试note",
-    "createTime" : "2016-07-22"
-  }, {
-    "batchId" : 100001,
-    "itemId" : 9,
-    "value" : "测试结果",
-    "score" : 1.2,
-    "note" : "测试note",
-    "createTime" : "2016-07-22"
-  }, {
-    "batchId" : 100001,
-    "itemId" : 10,
-    "value" : "测试结果",
-    "score" : 1.2,
-    "note" : "测试note",
-    "createTime" : "2016-07-22"
-  } ],
+  "content" : [ ],
   "tableName" : "inspections"
 }, {
   "content" : [ {
@@ -51397,7 +51526,7 @@ var Datas;
     "inspectorLoginTime" : null
   } ],
   "tableName" : "inspectors"
-} ];
+}];
  this.getData=function(){
  	return this.data;
  };
