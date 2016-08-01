@@ -5,6 +5,7 @@ function DataBase(ops, callback) {
 	this.inspItems = [];
 	this.itemRules = [];
 	this.itemTypes= [];
+	this.itemOptions=[];
 	this.init(ops.dbName, ops.version, ops.data, callback);
 }
 
@@ -127,6 +128,13 @@ DataBase.prototype.fetchStoreByCursor = function(storeName) {
 		}else if(storeName == 'insp_item_type') { //检查项规则表
 			if(cursor) {
 				self.itemTypes.push(cursor.value);
+				cursor.continue();
+			} else {
+				
+			}
+		}else if(storeName == 'insp_options') { //检查项规则表
+			if(cursor) {
+				self.itemOptions.push(cursor.value);
 				cursor.continue();
 			} else {
 				
