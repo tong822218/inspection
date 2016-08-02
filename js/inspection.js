@@ -23,7 +23,7 @@ var mydb = new DataBase({
 		items = mydb.inspItems;
 		itemRules = mydb.itemRules;
 		itemTypes = mydb.itemTypes;
-		itemOptions ＝ mydb.itemOptions;
+		itemOptions = mydb.itemOptions;
 		console.log(items);
 		console.log(itemRules);
 
@@ -71,6 +71,14 @@ function initDom() {
 		$(".content .multiselect").css({
 			"display": "flex"
 		});
+		var html='';
+		for(var i=0;i<itemOptions.length;i++){
+			if(itemOptions[i]['itemId']==list[0]['itemId']){
+				html+='<div class="item" onclick="selMul(this)"><span>'+itemOptions[i]['optionName']+'</span><img src="img/isp_nosel.png"></div>'
+			}
+		}
+		html+='<div style="clear:both"></div>';
+		$(".multiselect").html(html);
 	}
 	$(".question .text .big").html(list[0]['itemShowName']);
 	$(".question .text .little").html(list[0]['itemStandard']);
@@ -390,7 +398,8 @@ function clearVal() {
 	$("#result").val("");
 	$("#imgs").val("");
 	$(".hasimg .insert-text").val("");
-	var html += '<div><a> <input type="file" onchange="fileChange(this,1)" /> </a></div>';
+	var html ='';
+	html += '<div><a> <input type="file" onchange="fileChange(this,1)" /> </a></div>';
 	$(".hasimg .imgs").html(html);
 	$(".radio img").attr("src","../img/isp_nosel.png");
 	
