@@ -2,7 +2,7 @@
 var items = ''; //所有检查项
 var itemRules = ''; //所有检查项规则
 var itemTypes = ''; //所有检查大项
-var itemOptions='';//所有的多选题单选题的检查项
+var itemOptions = ''; //所有的多选题单选题的检查项
 var list = []; //每个检查大项下的检查项
 var currentTypeIndex = 0; //当前检测大项的index
 var currentIdex = 0; //当前list 的 index;
@@ -18,7 +18,7 @@ var mydb = new DataBase({
 	mydb.fetchStoreByCursor("insp_item_rules");
 	mydb.fetchStoreByCursor("insp_item_type");
 	mydb.fetchStoreByCursor("insp_options");
-	
+
 	var itv = setInterval(function() {
 		items = mydb.inspItems;
 		itemRules = mydb.itemRules;
@@ -29,6 +29,14 @@ var mydb = new DataBase({
 
 		if(items != '' && itemRules != '' && itemTypes != '' && itemOptions != '') {
 			window.clearInterval(itv);
+
+			list.indexof = function(itemId) {
+				for(var i = 0; i < list.length; i++) {
+					if(list[i]['itemId'] == itemId)
+						return i;
+				}
+			}
+			currentId = items[0]['itemId'];
 			initDom();
 		}
 	}, 200);
@@ -44,52 +52,128 @@ function getItemsByType() {
 	currentTypeIndex++;
 }
 //初始化dom
-function initDom() {
+function initDom(preOrNex) {
+	if(batchId == '') {
+		batchId = $("#batchId").val();
+	}
 	hideAll();
 	currentIdex = 0;
 	if(currentTypeIndex == itemTypes.length) {
 		return;
 	}
-
 	getItemsByType();
-	list.indexof = function(itemId) {
-		var a = this; //为了增加方法扩展适应性。我这稍微修改了下
-		for(var i = 0; i < list.length; i++) {
-			if(list[i]['itemId'] == itemId)
-				return i;
-		}
+	var preItem, preItemImg;
+	var res = ischecked(preOrNex);
+	if(res != null && res != undefined) {
+		preItem = res['preItem'];
+		preItemImg = res['preItemImg'];
 	}
-	if(list[0]['answerTypeId'] == 4) {
-		$(".content .hasimg").css({
-			"display": "block"
-		});
-	} else if(list[0]['answerTypeId'] == 1) {
-		$(".content .radio").css({
-			"display": "block"
-		});
-	} else if((list[0]['answerTypeId'] == 2) || (list[0]['answerTypeId'] == 3)) {
-		$(".content .multiselect").css({
-			"display": "flex"
-		});
-		var html='';
-		for(var i=0;i<itemOptions.length;i++){
-			if(itemOptions[i]['itemId']==list[0]['itemId']){
-				html+='<div class="item" onclick="selMul(this)"><span>'+itemOptions[i]['optionName']+'</span><img src="img/isp_nosel.png"></div>'
+	if(preItem != null && preItem != undefined) {
+		var item;
+		for(var i = 0; i < items.length; i++) {
+			if(items[i]['itemId'] == preItem['itemId']) {
+				item = items[i];
+				break;
 			}
 		}
-		html+='<div style="clear:both"></div>';
-		$(".multiselect").html(html);
+		if(item != undefined) {
+			if(item['answerTypeId'] == 4) {
+				$(".content .hasimg").css({
+					"display": "block"
+				});
+				$("#result").val(preItem['value']);
+				var html1 = '';
+				var html = $(".imgs").html();
+				var im = '';
+				$(".hasimg .insert-text").html(preItem['value']);
+				for(var i = 0; i < preItemImgre.length; i++) {
+					html1 += '<div style="background: url("' + preItemImg[i] + '") no-repeat;background-size: contain"><a> <input type="file" onchange="fileChange(this,1)" /> </a></div>';
+					im += preItemImg[i];
+					im += '$$';
+				}
+				html1 += html;
+				$(".imgs").html(html1);
+				$("#imgs").val(im);
+			} else if(item['answerTypeId'] == 1) {
+				$(".content .radio").css({
+					"display": "block"
+				});
+				$("#result").val(preItem['value']);
+				if(preItem['value'] == '1') {
+					$("#radio-yes img").attr("src", "img/isp_yes.png");
+				} else {
+					$("#radio-no img").attr("src", "img/isp_no.png");
+				}
+			} else if((item['answerTypeId'] == 2) || (item['answerTypeId'] == 3)) {
+				$(".content .multiselect").css({
+					"display": "flex"
+				});
+				$("#result").val(preItem['value']);
+				var html = '';
+				for(var i = 0; i < itemOptions.length; i++) {
+					if(itemOptions[i]['itemId'] == item['itemId']) {
+						html += '<div class="item" onclick="selMul(this)"><span>' + itemOptions[i]['optionName'] + '</span>'
+						var arr = preItem['value'].split("$");
+						var flag = false;
+						for(var j = 0; j < arr.length; j++) {
+							if(arr[j] == itemOptions[i]['optionName']) {
+								flag = true;
+								break;
+							}
+						}
+						if(flag) {
+							html += '<img src="img/isp_sel.png"></div>'
+						} else {
+							html += '<img src="img/isp_nosel.png"></div>'
+						}
+					}
+				}
+				html += '<div style="clear:both"></div>';
+				$(".multiselect").html(html);
+
+			}
+			currentId = item['itemId'];
+			$(".question .text .big").html(item['itemShowName']);
+			$(".question .text .little").html(item['itemStandard']);
+		}
+
+	} else { //如果没有检查结果执行此处
+
+		if(list[0]['answerTypeId'] == 4) {
+			$(".content .hasimg").css({
+				"display": "block"
+			});
+		} else if(list[0]['answerTypeId'] == 1) {
+			$(".content .radio").css({
+				"display": "block"
+			});
+		} else if((list[0]['answerTypeId'] == 2) || (list[0]['answerTypeId'] == 3)) {
+			$(".content .multiselect").css({
+				"display": "flex"
+			});
+			var html = '';
+			for(var i = 0; i < itemOptions.length; i++) {
+				if(itemOptions[i]['itemId'] == list[0]['itemId']) {
+					html += '<div class="item" onclick="selMul(this)"><span>' + itemOptions[i]['optionName'] + '</span><img src="img/isp_nosel.png"></div>'
+				}
+			}
+			html += '<div style="clear:both"></div>';
+			$(".multiselect").html(html);
+		}
+		currentId = list[0]['itemId'];
+		$(".question .text .big").html(list[0]['itemShowName']);
+		$(".question .text .little").html(list[0]['itemStandard']);
 	}
-	$(".question .text .big").html(list[0]['itemShowName']);
-	$(".question .text .little").html(list[0]['itemStandard']);
+
 }
-//加载上一页面
-function LoadPreDom(preItem, preItemImg) {
+//加载上一页面或者下一页
+function LoadPreDom(preItem, preItemImg, preOrNext) {
 	hideAll();
 	var item;
-	for(var i = 0; i < list.length; i++) {
-		if(list[i]['itemId'] == preItem['itemId']) {
-			item = list[i];
+	for(var i = 0; i < items.length; i++) {
+		if(items[i]['itemId'] == preItem['itemId']) {
+			item = items[i];
+			break;
 		}
 	}
 	if(item != null && item != undefined) {
@@ -101,6 +185,7 @@ function LoadPreDom(preItem, preItemImg) {
 			var html1 = '';
 			var html = $(".imgs").html();
 			var im = '';
+			$(".hasimg .insert-text").html(preItem['value']);
 			for(var i = 0; i < preItemImgre.length; i++) {
 				html1 += '<div style="background: url("' + preItemImg[i] + '") no-repeat;background-size: contain"><a> <input type="file" onchange="fileChange(this,1)" /> </a></div>';
 				im += preItemImg[i];
@@ -114,14 +199,68 @@ function LoadPreDom(preItem, preItemImg) {
 				"display": "block"
 			});
 			$("#result").val(preItem['value']);
+			if(preItem['value'] == '1') {
+				$("#radio-yes img").attr("src", "img/isp_yes.png");
+			} else {
+				$("#radio-no img").attr("src", "img/isp_no.png");
+			}
 		} else if((item['answerTypeId'] == 2) || (item['answerTypeId'] == 3)) {
 			$(".content .multiselect").css({
 				"display": "flex"
 			});
 			$("#result").val(preItem['value']);
+			var html = '';
+			for(var i = 0; i < itemOptions.length; i++) {
+				if(itemOptions[i]['itemId'] == item['itemId']) {
+					html += '<div class="item" onclick="selMul(this)"><span>' + itemOptions[i]['optionName'] + '</span>'
+					var arr = preItem['value'].split("$");
+					var flag = false;
+					for(var j = 0; j < arr.length; j++) {
+						if(arr[j] == itemOptions[i]['optionName']) {
+							flag = true;
+							break;
+						}
+					}
+					if(flag) {
+						html += '<img src="img/isp_sel.png"></div>'
+					} else {
+						html += '<img src="img/isp_nosel.png"></div>'
+					}
+				}
+			}
+			html += '<div style="clear:both"></div>';
+			$(".multiselect").html(html);
+
 		}
 		$(".question .text .big").html(item['itemShowName']);
 		$(".question .text .little").html(item['itemStandard']);
+		currentId = item['itemId'];
+		var f = false;
+		for(var i = 0; i < itemRules.length; i++) { //判断是否还有下一个子检查项，没有就在大项加1
+			if(itemRules[i]['itemId'] == item['itemId'] && itemOptions[i]['itemResult'] == preItem['value']) {
+				f = true;
+				if(itemOptions[i]['childItemId'] == null || itemOptions[i]['childItemId'] == undefined || itemOptions[i]['childItemId'] == '') {
+					if(preOrNext == 'pre') {
+						currentTypeIndex--;
+						currentTypeIndex = (currentTypeIndex < 0 ? 0 : currentTypeIndex);
+					} else {
+						currentTypeIndex++;
+						currentTypeIndex = (currentTypeIndex > itemTypes.length ? itemTypes.length : currentTypeIndex);
+					}
+				}
+			}
+		}
+		if(!f) {
+			if(preOrNext == 'pre') {
+				currentTypeIndex--;
+				currentTypeIndex = (currentTypeIndex < 0 ? 0 : currentTypeIndex);
+			} else {
+				currentTypeIndex++;
+				currentTypeIndex = (currentTypeIndex > itemTypes.length ? itemTypes.length : currentTypeIndex);
+			}
+		}
+	} else {
+		isLastpage(preOrNext);
 	}
 
 }
@@ -130,11 +269,14 @@ function LoadNextDom(result) {
 	hideAll();
 	var flag = false;
 	for(var i = 0; i < itemRules.length; i++) {
-		if(itemRules[i]['itemResult'] == result && itemRules[i]['itemId'] == list[currentIdex]['itemId']) {
-			for(var j = 0; j < list.length; j++) {
-				if(list[j]['itemId'] == itemRules[i]['childItemId']) {
+		if(flag) {
+			break;
+		}
+		if(itemRules[i]['itemResult'] == result && itemRules[i]['itemId'] == currentId) {
+			for(var j = 0; j < items.length; j++) {
+				if(items[j]['itemId'] == itemRules[i]['childItemId']) {
 					flag = true;
-					var item = list[j];
+					var item = items[j];
 					if(item['answerTypeId'] == 4) {
 						$(".content .hasimg").css({
 							"display": "block"
@@ -147,17 +289,26 @@ function LoadNextDom(result) {
 						$(".content .multiselect").css({
 							"display": "flex"
 						});
+						var html = '';
+						for(var i = 0; i < itemOptions.length; i++) {
+							if(itemOptions[i]['itemId'] == item['itemId']) {
+								html += '<div class="item" onclick="selMul(this)"><span>' + itemOptions[i]['optionName'] + '</span><img src="img/isp_nosel.png"></div>'
+							}
+						}
+						html += '<div style="clear:both"></div>';
+						$(".multiselect").html(html);
 					}
 					$(".question .text .big").html(item['itemShowName']);
 					$(".question .text .little").html(item['itemStandard']);
-					currentIdex = list.indexof(item['sId']);
+					//currentIdex = list.indexof(item['itemId']);
+					currentId = item['itemId'];
+					break;
 				}
 			}
-
 		}
 	}
 	if(!flag) {
-		isLastpage();
+		isLastpage('next');
 	}
 
 }
@@ -177,45 +328,47 @@ function lastPage() {
 }
 //上一题
 function pre() {
+	clearVal();
 	var res = ischecked('pre');
 	var preItem = res['preItem'];
 	var preItemImg = res['preItemImg'];
 
 	if(preItem != null && preItem != undefined) {
-		LoadPreDom(preItem, preItemImg);
+		LoadPreDom(preItem, preItemImg, 'pre');
 	}
-
 }
 //下一题
 function next() {
 
 	var result = $("#result").val();
 	var imgs = $("#imgs").val();
+	clearVal();
 	if(result != "") {
 		savaItem(result, imgs);
+	}else{
+		alert('检验结果不能为空！');
+		return;
 	}
-	var res = ischecked();
+	var res = ischecked('next');
 	var preItem = res['preItem'];
 	var preItemImg = res['preItemImg'];
 
 	if(preItem != null && preItem != undefined) {
-		LoadPreDom(preItem, preItemImg);
+		LoadPreDom(preItem, preItemImg, 'next');
 	} else {
 		if(list[currentIdex] && list[currentIdex]['answerTypeId'] == 4) {
-			isLastpage();
+			isLastpage('next');
 		} else {
-			if(list[currentIdex] && list[currentIdex]['sId'] != null && list[currentIdex]['sId'] != 'null') {
+			if(list[currentIdex]) {
 				LoadNextDom(result);
 			} else {
-				isLastpage();
+				isLastpage('next');
 			}
 		}
 		$("#result").val("");
 		$("#imgs").val("");
-		$(".hasimg .insert-text").val("");
 
 	}
-
 }
 
 //判断是不是已经检查过了（再本地缓存中是否存在）
@@ -225,20 +378,27 @@ function ischecked(nextOrPre) {
 		$("#result").val("");
 		$("#imgs").val("");
 		res = JSON.parse(res);
-		var items = res['items'];
-		var photos = res['photos'];
-		var itemId = list[currentIdex]['itemId'];
+		var items = res['inspections'];
+		var photos = res['inspectionPhotos'];
+		//var itemId = items[currentIdex]['itemId'];
 		var preItem;
 		var preItemImg = [];
-
+		var f = false;
 		for(var i = 0; i < items.length; i++) {
-			if(items[i]['itemId'] == itemId) {
+			if(items[i]['itemId'] == currentId) {
+				f = true;
 				if(nextOrPre == 'pre') {
 					preItem = items[i - 1 < 0 ? 0 : i - 1];
-				} else {
+				} else if(nextOrPre == 'next') {
 					preItem = items[i + 1];
+				} else {
+					preItem = items[i];
 				}
-
+			}
+		}
+		if(!f) {
+			if(nextOrPre == 'pre') {
+				preItem = items[items.length - 1];
 			}
 		}
 		for(var i = 0; i < photos.length; i++) {
@@ -255,21 +415,18 @@ function ischecked(nextOrPre) {
 }
 //将本条的检测结果缓存到本地
 function savaItem(result, imgs) {
-	var itemId = list[currentIdex]['itemId'];
+	var itemId = currentId;
 	var item = {
 		"itemId": itemId,
 		"value": result
 	};
-	if(batchId == '') {
-		batchId = $("#batchId").val();
-	}
 	var res = localStorage.getItem(batchId);
 	if(res == null) {
 		res = {
-			items: [],
-			photos: []
+			inspections: [],
+			inspectionPhotos: []
 		};
-		res.items.push(item);
+		res.inspections.push(item);
 		var ims = imgs.split("$$");
 		for(var i = 0; i < ims.length; i++) {
 			if(ims[i] != '') {
@@ -277,13 +434,13 @@ function savaItem(result, imgs) {
 					"itemId": itemId,
 					"image": ims[i]
 				};
-				res.photos.push(photo);
+				res.inspectionPhotos.push(photo);
 			}
 		}
 	} else {
 		res = JSON.parse(res);
-		var items = res['items'];
-		var photos = res['photos'];
+		var items = res['inspections'];
+		var photos = res['inspectionPhotos'];
 
 		var flag = false;
 		for(var i = 0; i < items.length; i++) {
@@ -308,12 +465,12 @@ function savaItem(result, imgs) {
 					"itemId": itemId,
 					"image": ims[i]
 				};
-				res.photos.push(photo);
+				photos.push(photo);
 			}
 		}
 
-		res['items'] = items;
-		res['photos'] = photos;
+		res['inspections'] = items;
+		res['inspectionPhotos'] = photos;
 	}
 
 	var str = JSON.stringify(res);
@@ -335,11 +492,11 @@ function hideAll() {
 	});
 }
 //判断是不是最后一个检查大项，如果是就跳到提交页面，不是跳到下一个检测大项
-function isLastpage() {
+function isLastpage(preOrNext) {
 	if(currentTypeIndex == itemTypes.length) { //如果是最后一个检测大项了直接跳到提交页面
 		lastPage();
 	} else {
-		initDom();
+		initDom(preOrNext);
 	}
 }
 //输入问题改变时
@@ -398,11 +555,11 @@ function clearVal() {
 	$("#result").val("");
 	$("#imgs").val("");
 	$(".hasimg .insert-text").val("");
-	var html ='';
+	var html = '';
 	html += '<div><a> <input type="file" onchange="fileChange(this,1)" /> </a></div>';
 	$(".hasimg .imgs").html(html);
-	$(".radio img").attr("src","../img/isp_nosel.png");
-	
+	$(".radio img").attr("src", "img/isp_nosel.png");
+
 }
 //-------------------------------------图片处理，压缩，转换base64等---------------------------------------------------------------------------------------
 
